@@ -1,5 +1,8 @@
 @extends('layouts.app')
  
 @section('content')
-    <example-component></example-component>
+    @foreach($frames as $frame)
+        <frame-component color="{{ $frame->color }}" title="{{ $frame->title }}" id="{{ $frame->id }}" :posts="{{ $frame->posts }}"></frame-component>
+        <br>
+    @endforeach
 @endsection
