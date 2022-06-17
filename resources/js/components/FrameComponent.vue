@@ -18,6 +18,11 @@
                                     <div class="card-body">
                                         <p>{{ post.description }}</p>
                                     </div>
+
+                                    <div class="card-footer">
+                                        <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
+                                        <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
+                                    </div>
                                 </div>
                                 <br>
                             </div>
@@ -31,6 +36,7 @@
 
 <script>
     import moment from 'moment';
+    
 
     export default {
         props: {
@@ -58,6 +64,10 @@
 
             letra(){
                 return "text-" + this.color
+            },
+
+            botao(){
+                return "btn-outline-" + this.color
             }
         }
     }
