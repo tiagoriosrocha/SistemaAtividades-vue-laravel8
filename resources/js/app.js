@@ -10,11 +10,13 @@ window.Vue = require('vue').default;
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPenToSquare, faTrash, faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret } from '@fortawesome/free-solid-svg-icons'
 
 library.add(faUserSecret)
 library.add(faPenToSquare)
 library.add(faTrash)
+library.add(faArrowUp)
+library.add(faArrowDown)
 
 /**
  * The following block of code may be used to automatically register your

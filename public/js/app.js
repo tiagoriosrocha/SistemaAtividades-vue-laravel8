@@ -20437,13 +20437,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'title': String,
+    'descer': Boolean,
+    'subir': Boolean,
     'id': [Number, String],
     'color': String,
     'posts': []
+  },
+  data: function data() {
+    return {
+      listaPosts: []
+    };
   },
   filters: {
     filtroDataHora: function filtroDataHora(date) {
@@ -20452,6 +20461,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     console.log('Component mounted.');
+  },
+  created: function created() {
+    this.listaPosts = this.posts;
   },
   computed: {
     borda: function borda() {
@@ -20465,6 +20477,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     botao: function botao() {
       return "btn-outline-" + this.color;
+    }
+  },
+  methods: {
+    greet: function greet(event) {
+      // `this` inside methods point to the Vue instance
+      alert('Hello ' + this.name + '!'); // `event` is the native DOM event
+
+      alert(event.target.tagName);
+    },
+    descerPost: function descerPost(index) {
+      console.log("descer: " + index);
+      this.posts.splice(index, 1);
+      console.log(this.posts);
+    },
+    subirPost: function subirPost(index) {
+      console.log("subir: " + index);
+      this.posts.splice(index, 1);
+      console.log(this.posts);
     }
   }
 });
@@ -20533,6 +20563,8 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faUserSecret);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faPenToSquare);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faTrash);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faArrowUp);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faArrowDown);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -64802,7 +64834,7 @@ var render = function () {
             _c(
               "div",
               { staticClass: "row" },
-              _vm._l(_vm.posts, function (post, index) {
+              _vm._l(_vm.listaPosts, function (post, index) {
                 return _c(
                   "div",
                   {
@@ -64859,6 +64891,62 @@ var render = function () {
                           [
                             _c("font-awesome-icon", {
                               attrs: { icon: "fa-solid fa-trash" },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.descer,
+                                expression: "descer",
+                              },
+                            ],
+                            staticClass: "btn btn-sm",
+                            class: _vm.botao,
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.descerPost(index)
+                              },
+                            },
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "fa-solid fa-arrow-down" },
+                            }),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.subir,
+                                expression: "subir",
+                              },
+                            ],
+                            staticClass: "btn btn-sm",
+                            class: _vm.botao,
+                            attrs: { href: "#" },
+                            on: {
+                              click: function ($event) {
+                                return _vm.subirPost(index)
+                              },
+                            },
+                          },
+                          [
+                            _c("font-awesome-icon", {
+                              attrs: { icon: "fa-solid fa-arrow-up" },
                             }),
                           ],
                           1

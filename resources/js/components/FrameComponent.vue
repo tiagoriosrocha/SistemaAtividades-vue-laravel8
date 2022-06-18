@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3" v-for="(post, index) in posts" :key="post.id" :post="post">
+                            <div class="col-md-3" v-for="(post, index) in listaPosts" :key="post.id" :post="post">
                                 <div class="card" :class="borda">
                                     <div class="card-header text-white" :class="fundo">
                                         {{ index+1 }} - {{ post.title }}
@@ -22,6 +22,8 @@
                                     <div class="card-footer">
                                         <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
                                         <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
+                                        <a href="#" class="btn btn-sm" @click="descerPost(index)" v-show="descer" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-down" /></a>
+                                        <a href="#" class="btn btn-sm" @click="subirPost(index)" v-show="subir" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-up" /></a>
                                     </div>
                                 </div>
                                 <br>
@@ -41,9 +43,16 @@
     export default {
         props: {
             'title' : String,
+            'descer' : Boolean,
+            'subir' : Boolean,
             'id' : [Number, String],
             'color' : String,
             'posts' : [],
+        },
+        data() {
+            return {
+                listaPosts: []
+            }
         },
         filters: {
             filtroDataHora: function (date) {
@@ -52,6 +61,9 @@
         },
         mounted() {
             console.log('Component mounted.')
+        },
+        created(){
+            this.listaPosts = this.posts
         },
         computed: {
             borda(){
@@ -68,6 +80,24 @@
 
             botao(){
                 return "btn-outline-" + this.color
+            }
+        },
+        methods: {
+            greet: function (event) {
+                // `this` inside methods point to the Vue instance
+                alert('Hello ' + this.name + '!')
+                // `event` is the native DOM event
+                alert(event.target.tagName)
+            },
+            descerPost(index){
+                console.log("descer: " + index)
+                this.posts.splice(index, 1)
+                console.log(this.posts)
+            },
+            subirPost(index){
+                console.log("subir: " + index)
+                this.posts.splice(index,1)
+                console.log(this.posts)
             }
         }
     }
