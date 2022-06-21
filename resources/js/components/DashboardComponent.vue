@@ -22,23 +22,7 @@
         props: {
             'frames' : [],
         },
-        data() {
-            return {
-                
-            }
-        },
-        filters: {
         
-        },
-        mounted() {
-            console.log('Component mounted.')
-        },
-        created(){
-        
-        },
-        computed: {
-        
-        },
         methods: {
             movimentar(origem, destino, post){
                 console.log("dashboard: movimentar => origem: " + origem)

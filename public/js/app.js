@@ -20422,15 +20422,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     'frames': []
   },
-  data: function data() {
-    return {};
-  },
-  filters: {},
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  },
-  created: function created() {},
-  computed: {},
   methods: {
     movimentar: function movimentar(origem, destino, post) {
       console.log("dashboard: movimentar => origem: " + origem);
@@ -20479,21 +20470,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
@@ -20504,7 +20480,6 @@ __webpack_require__.r(__webpack_exports__);
     'color': String,
     'posts': []
   },
-  watch: {},
   data: function data() {
     return {
       listaPosts: []
@@ -20537,12 +20512,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    greet: function greet(event) {
-      // `this` inside methods point to the Vue instance
-      alert('Hello ' + this.name + '!'); // `event` is the native DOM event
-
-      alert(event.target.tagName);
-    },
     descerPost: function descerPost(index) {
       this.$emit('movimentar-post', this.id, this.id + 1, this.posts[index]);
       this.posts.splice(index, 1);
@@ -20597,10 +20566,32 @@ __webpack_require__.r(__webpack_exports__);
     'post': [],
     'index': Number,
     'descer': Boolean,
-    'subir': Boolean
+    'subir': Boolean,
+    'color': String
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  methods: {
+    subirPost: function subirPost(index) {
+      console.log("PostComponent: Subir");
+      this.$emit('subir-post', index);
+    },
+    descerPost: function descerPost(index) {
+      console.log("PostComponent: Descer");
+      this.$emit('descer-post', index);
+    }
+  },
+  computed: {
+    borda: function borda() {
+      return "border-" + this.color;
+    },
+    fundo: function fundo() {
+      return "bg-" + this.color;
+    },
+    letra: function letra() {
+      return "text-" + this.color;
+    },
+    botao: function botao() {
+      return "btn-outline-" + this.color;
+    }
   }
 });
 
@@ -65075,119 +65066,23 @@ var render = function () {
                     attrs: { post: post },
                   },
                   [
-                    _c("div", { staticClass: "card", class: _vm.borda }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "card-header text-white",
-                          class: _vm.fundo,
-                        },
-                        [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(index + 1) +
-                              " - " +
-                              _vm._s(post.title) +
-                              "\n                                "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("p", [_vm._v(_vm._s(post.description))]),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-footer" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-sm",
-                            class: _vm.botao,
-                            attrs: { href: "#" },
-                          },
-                          [
-                            _c("font-awesome-icon", {
-                              attrs: { icon: "fa-solid fa-pen-to-square" },
-                            }),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-sm",
-                            class: _vm.botao,
-                            attrs: { href: "#" },
-                          },
-                          [
-                            _c("font-awesome-icon", {
-                              attrs: { icon: "fa-solid fa-trash" },
-                            }),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.descer,
-                                expression: "descer",
-                              },
-                            ],
-                            staticClass: "btn btn-sm",
-                            class: _vm.botao,
-                            attrs: { href: "#" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.descerPost(index)
-                              },
-                            },
-                          },
-                          [
-                            _c("font-awesome-icon", {
-                              attrs: { icon: "fa-solid fa-arrow-down" },
-                            }),
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.subir,
-                                expression: "subir",
-                              },
-                            ],
-                            staticClass: "btn btn-sm",
-                            class: _vm.botao,
-                            attrs: { href: "#" },
-                            on: {
-                              click: function ($event) {
-                                return _vm.subirPost(index)
-                              },
-                            },
-                          },
-                          [
-                            _c("font-awesome-icon", {
-                              attrs: { icon: "fa-solid fa-arrow-up" },
-                            }),
-                          ],
-                          1
-                        ),
-                      ]),
-                    ]),
+                    _c("post-component", {
+                      attrs: {
+                        color: _vm.color,
+                        index: index,
+                        post: post,
+                        descer: _vm.descer,
+                        subir: _vm.subir,
+                      },
+                      on: {
+                        "descer-post": _vm.descerPost,
+                        "subir-post": _vm.subirPost,
+                      },
+                    }),
                     _vm._v(" "),
                     _c("br"),
-                  ]
+                  ],
+                  1
                 )
               }),
               0
@@ -65228,8 +65123,11 @@ var render = function () {
           _vm._s(_vm.index + 1) +
           " - " +
           _vm._s(_vm.post.title) +
-          "\n    "
+          "  "
       ),
+      _c("span", { staticClass: "badge bg-light text-black rounded-pill" }, [
+        _vm._v("#" + _vm._s(_vm.post.id)),
+      ]),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
@@ -65271,7 +65169,7 @@ var render = function () {
           attrs: { href: "#" },
           on: {
             click: function ($event) {
-              return _vm.$root.$emit("descerPost", _vm.index)
+              return _vm.descerPost(_vm.index)
             },
           },
         },
@@ -65299,7 +65197,7 @@ var render = function () {
           attrs: { href: "#" },
           on: {
             click: function ($event) {
-              return _vm.$root.$emit("subirPost", _vm.index)
+              return _vm.subirPost(_vm.index)
             },
           },
         },
