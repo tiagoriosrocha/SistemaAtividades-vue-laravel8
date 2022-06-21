@@ -20487,10 +20487,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     novaAtividade: function novaAtividade() {
-      this.modal = true;
-      this.title = "";
-      this.description = "";
-      this.scheduledto = "";
+      this.modal = true; //this.title = ""
+      //this.description = ""
+      //this.scheduledto = ""
+
       console.log("show modal");
     },
     salvarAtividade: function salvarAtividade() {
@@ -20506,10 +20506,9 @@ __webpack_require__.r(__webpack_exports__);
         return _this.movimentar(0, _this.frames[0].id, response.data);
       })["catch"](function (error) {
         return console.log("resposta erro: " + error);
-      });
-      this.title = "";
-      this.description = "";
-      this.scheduledto = "";
+      }); //this.title = ""
+      //this.description = ""
+      //this.scheduledto = ""
     },
     deletarPost: function deletarPost(post) {
       axios.post('/post/delete', {
@@ -20655,6 +20654,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'post': [],
@@ -20730,6 +20730,7 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fort
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowUp);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowDown);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlus);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faMagnifyingGlass);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -65217,9 +65218,25 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.title,
+                          expression: "title",
+                        },
+                      ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "title" },
                       domProps: { value: _vm.title },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.title = $event.target.value
+                        },
+                      },
                     }),
                   ]),
                   _vm._v(" "),
@@ -65234,9 +65251,25 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.description,
+                          expression: "description",
+                        },
+                      ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "description" },
                       domProps: { value: _vm.description },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.description = $event.target.value
+                        },
+                      },
                     }),
                   ]),
                   _vm._v(" "),
@@ -65251,9 +65284,25 @@ var render = function () {
                     ),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.scheduledto,
+                          expression: "scheduledto",
+                        },
+                      ],
                       staticClass: "form-control",
                       attrs: { type: "text", id: "scheduledto" },
                       domProps: { value: _vm.scheduledto },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.scheduledto = $event.target.value
+                        },
+                      },
                     }),
                   ]),
                 ]),
@@ -65406,7 +65455,7 @@ var render = function () {
         "\n            " +
           _vm._s(_vm.index + 1) +
           " - " +
-          _vm._s(_vm.post.title) +
+          _vm._s(_vm.post.title.substring(0, 25)) +
           "  "
       ),
       _c("span", { staticClass: "badge bg-light text-black rounded-pill" }, [
@@ -65414,11 +65463,22 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
+    _c("div", { staticClass: "card-body collapse" }, [
       _c("p", [_vm._v(_vm._s(_vm.post.description))]),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "a",
+        { staticClass: "btn btn-sm", class: _vm.botao, attrs: { href: "#" } },
+        [
+          _c("font-awesome-icon", {
+            attrs: { icon: "fa-solid fa-magnifying-glass" },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
       _c(
         "a",
         { staticClass: "btn btn-sm", class: _vm.botao, attrs: { href: "#" } },

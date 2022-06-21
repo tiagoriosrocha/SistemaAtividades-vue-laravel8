@@ -34,15 +34,15 @@
                     <form class="form">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title:</label>
-                            <input type="text" class="form-control" id="title" :value="title">
+                            <input type="text" class="form-control" id="title" v-model="title">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description:</label>
-                            <input type="text" class="form-control" id="description" :value="description">
+                            <input type="text" class="form-control" id="description" v-model="description">
                         </div>
                         <div class="mb-3">
                             <label for="scheduledto" class="form-label">Scheduled to:</label>
-                            <input type="text" class="form-control" id="scheduledto" :value="scheduledto">
+                            <input type="text" class="form-control" id="scheduledto" v-model="scheduledto">
                         </div>
                     </form>
                 </div>
@@ -90,9 +90,9 @@
 
             novaAtividade(){
                 this.modal = true
-                this.title = ""
-                this.description = ""
-                this.scheduledto = ""
+                //this.title = ""
+                //this.description = ""
+                //this.scheduledto = ""
                 console.log("show modal")
             },
 
@@ -108,9 +108,9 @@
                 .then(response => (this.movimentar(0,this.frames[0].id,response.data)))
                 .catch(error => (console.log("resposta erro: " + error)));
 
-                this.title = ""
-                this.description = ""
-                this.scheduledto = ""
+                //this.title = ""
+                //this.description = ""
+                //this.scheduledto = ""
             },
 
             deletarPost(post){                

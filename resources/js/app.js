@@ -12,7 +12,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import Vue from 'vue';
 
 library.add(faUserSecret)
@@ -21,6 +21,7 @@ library.add(faTrash)
 library.add(faArrowUp)
 library.add(faArrowDown)
 library.add(faPlus)
+library.add(faMagnifyingGlass)
 
 /**
  * The following block of code may be used to automatically register your

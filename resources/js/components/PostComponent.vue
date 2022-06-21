@@ -1,14 +1,15 @@
 <template>
     <div class="card" :class="borda">
         <div class="card-header text-white" :class="fundo">
-                {{ index+1 }} - {{ post.title }}  <span class="badge bg-light text-black rounded-pill">#{{ post.id }}</span>
+                {{ index+1 }} - {{ post.title.substring(0,25) }}  <span class="badge bg-light text-black rounded-pill">#{{ post.id }}</span>
         </div>
         
-        <div class="card-body">
+        <div class="card-body collapse">
             <p>{{ post.description }}</p>
         </div>
 
         <div class="card-footer">
+            <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></a>
             <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
             <a href="#" class="btn btn-sm" @click="deletarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
             <a href="#" class="btn btn-sm" @click="descerPost(index)" v-show="descer" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-down" /></a>
