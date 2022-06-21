@@ -49,6 +49,9 @@
             'color' : String,
             'posts' : [],
         },
+        watch: {
+            
+        },
         data() {
             return {
                 listaPosts: []
@@ -61,6 +64,7 @@
         },
         mounted() {
             console.log('Component mounted.')
+            this.$root.$on('receberPost', this.addPost)
         },
         created(){
             this.listaPosts = this.posts
@@ -90,14 +94,19 @@
                 alert(event.target.tagName)
             },
             descerPost(index){
-                console.log("descer: " + index)
+                this.$emit('movimentar-post', this.id, this.id+1, this.posts[index])
                 this.posts.splice(index, 1)
-                console.log(this.posts)
             },
             subirPost(index){
-                console.log("subir: " + index)
+                this.$emit('movimentar-post', this.id, this.id-1, this.posts[index])
                 this.posts.splice(index,1)
-                console.log(this.posts)
+            },
+
+            addPost(post, destino){
+                if( destino == this.id ){
+                    this.posts.push(post)
+                    console.log("adicionado no vetor")
+                }
             }
         }
     }

@@ -31,6 +31,7 @@ library.add(faArrowDown)
 
 Vue.component('frame-component', require('./components/FrameComponent.vue').default);
 Vue.component('post-component', require('./components/PostComponent.vue').default);
+Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 /**
