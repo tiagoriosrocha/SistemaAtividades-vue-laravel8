@@ -22,4 +22,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::post('/atividade', [App\Http\Controllers\PostController::class, 'store']);
+Route::post('/post', [App\Http\Controllers\PostController::class, 'store']);
+Route::post('/post/delete', [App\Http\Controllers\PostController::class, 'destroy']);

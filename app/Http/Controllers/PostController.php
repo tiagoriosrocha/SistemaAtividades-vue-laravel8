@@ -102,8 +102,19 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        if( isset($request) ){
+            $id = $request->input('id');
+            Log::info("deletando registro: " . $id);
+
+            $post = Post::find($id);
+            $post->delete($id);
+
+            return response()->json(['resposta' => 'ok'], 200);
+        }else{
+            return response()->json(['resposta' => 'error'], 401);
+        }
+        
     }
 }

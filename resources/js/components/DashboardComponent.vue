@@ -92,7 +92,7 @@
             salvarAtividade(){
                 console.log("criando nova atividade")
                 
-                axios.post('/atividade', {
+                axios.post('/post', {
                     'title': this.title,
                     'description': this.description,
                     'scheduledto': this.scheduledto,

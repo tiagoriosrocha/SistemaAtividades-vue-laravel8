@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3" v-for="(post, index) in listaPosts" :key="post.id" :post="post">
-                                <post-component @descer-post="descerPost" @subir-post="subirPost" :color="color" :index="index" :post="post" :descer="descer" :subir="subir"></post-component>
+                                <post-component @deletar-post="deletarPost" @descer-post="descerPost" @subir-post="subirPost" :color="color" :index="index" :post="post" :descer="descer" :subir="subir"></post-component>
                                 <br>
                             </div>
                         </div>
@@ -89,6 +89,14 @@
                     this.posts.push(post)
                     console.log("adicionado no vetor")
                 }
+            },
+
+            deletarPost(index, post){                
+                axios.post('/post/delete',{
+                    'id': post.id
+                })
+                .then(response => (this.posts.splice(index,1)))
+                .catch(error => (console.log("resposta erro: " + error)));
             }
         }
     }

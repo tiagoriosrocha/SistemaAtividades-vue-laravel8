@@ -10,7 +10,7 @@
 
         <div class="card-footer">
             <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
-            <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
+            <a href="#" class="btn btn-sm" @click="deletarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
             <a href="#" class="btn btn-sm" @click="descerPost(index)" v-show="descer" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-down" /></a>
             <a href="#" class="btn btn-sm" @click="subirPost(index)" v-show="subir" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-up" /></a>
         </div>
@@ -35,6 +35,10 @@
             descerPost(index){
                 console.log("PostComponent: Descer")
                 this.$emit('descer-post',index)
+            },
+            deletarPost(index){
+                console.log("PostComponent: Deletar")
+                this.$emit('deletar-post',index, this.post)
             }
         },
         

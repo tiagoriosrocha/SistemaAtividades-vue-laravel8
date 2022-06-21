@@ -20489,7 +20489,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       console.log("criando nova atividade");
-      axios.post('/atividade', {
+      axios.post('/post', {
         'title': this.title,
         'description': this.description,
         'scheduledto': this.scheduledto,
@@ -20599,6 +20599,17 @@ __webpack_require__.r(__webpack_exports__);
         this.posts.push(post);
         console.log("adicionado no vetor");
       }
+    },
+    deletarPost: function deletarPost(index, post) {
+      var _this = this;
+
+      axios.post('/post/delete', {
+        'id': post.id
+      }).then(function (response) {
+        return _this.posts.splice(index, 1);
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     }
   }
 });
@@ -20651,6 +20662,10 @@ __webpack_require__.r(__webpack_exports__);
     descerPost: function descerPost(index) {
       console.log("PostComponent: Descer");
       this.$emit('descer-post', index);
+    },
+    deletarPost: function deletarPost(index) {
+      console.log("PostComponent: Deletar");
+      this.$emit('deletar-post', index, this.post);
     }
   },
   computed: {
@@ -65325,6 +65340,7 @@ var render = function () {
                         subir: _vm.subir,
                       },
                       on: {
+                        "deletar-post": _vm.deletarPost,
                         "descer-post": _vm.descerPost,
                         "subir-post": _vm.subirPost,
                       },
@@ -65398,7 +65414,16 @@ var render = function () {
       _vm._v(" "),
       _c(
         "a",
-        { staticClass: "btn btn-sm", class: _vm.botao, attrs: { href: "#" } },
+        {
+          staticClass: "btn btn-sm",
+          class: _vm.botao,
+          attrs: { href: "#" },
+          on: {
+            click: function ($event) {
+              return _vm.deletarPost(_vm.index)
+            },
+          },
+        },
         [_c("font-awesome-icon", { attrs: { icon: "fa-solid fa-trash" } })],
         1
       ),
