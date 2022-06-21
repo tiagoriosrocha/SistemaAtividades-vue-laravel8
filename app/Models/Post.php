@@ -14,6 +14,14 @@ class Post extends Model
 
     protected $table = 'posts';
 
+    protected $fillable = [
+        'title',
+        'scheduledto',
+        'description',
+        'user_id',
+        'frame_id'
+    ];
+
     public function messages()
     {
         return $this->hasMany(Message::class); //tem muitas

@@ -20418,9 +20418,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'frames': []
+  },
+  data: function data() {
+    return {
+      modal: true,
+      title: "Título",
+      description: "Descrição",
+      scheduledto: "2022-07-30 13:00:00",
+      post: [],
+      destino: Number
+    };
   },
   methods: {
     movimentar: function movimentar(origem, destino, post) {
@@ -20428,6 +20477,31 @@ __webpack_require__.r(__webpack_exports__);
       console.log("dashboard: movimentar => destino: " + destino);
       console.log("dashboard: movimentar => objeto: " + JSON.stringify(post));
       this.$root.$emit('receberPost', post, destino);
+    },
+    novaAtividade: function novaAtividade() {
+      this.modal = true; //this.title = ""
+      //this.description = ""
+      //this.scheduledto = ""
+
+      console.log("show modal");
+    },
+    salvarAtividade: function salvarAtividade() {
+      var _this = this;
+
+      console.log("criando nova atividade");
+      axios.post('/atividade', {
+        'title': this.title,
+        'description': this.description,
+        'scheduledto': this.scheduledto,
+        'frameid': this.frames[0].id
+      }).then(function (response) {
+        return _this.movimentar(0, _this.frames[0].id, response.data);
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
+      this.title = "";
+      this.description = "";
+      this.scheduledto = "";
     }
   }
 });
@@ -20605,9 +20679,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-axios */ "./node_modules/vue-axios/dist/vue-axios.esm.min.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/vue-fontawesome */ "./node_modules/@fortawesome/vue-fontawesome/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -20619,11 +20697,15 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faUserSecret);
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faPenToSquare);
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faTrash);
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faArrowUp);
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_2__.faArrowDown);
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faUserSecret);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPenToSquare);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faTrash);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowUp);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowDown);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlus);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20634,17 +20716,18 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_0__.library.add(_fort
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('frame-component', (__webpack_require__(/*! ./components/FrameComponent.vue */ "./resources/js/components/FrameComponent.vue")["default"]));
-Vue.component('post-component', (__webpack_require__(/*! ./components/PostComponent.vue */ "./resources/js/components/PostComponent.vue")["default"]));
-Vue.component('dashboard-component', (__webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]));
-Vue.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_1__.FontAwesomeIcon);
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].component('frame-component', (__webpack_require__(/*! ./components/FrameComponent.vue */ "./resources/js/components/FrameComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].component('post-component', (__webpack_require__(/*! ./components/PostComponent.vue */ "./resources/js/components/PostComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].component('dashboard-component', (__webpack_require__(/*! ./components/DashboardComponent.vue */ "./resources/js/components/DashboardComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_3__.FontAwesomeIcon);
+vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue_axios__WEBPACK_IMPORTED_MODULE_1__["default"], (axios__WEBPACK_IMPORTED_MODULE_0___default()));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
   el: '#app'
 });
 
@@ -64722,6 +64805,22 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/vue-axios/dist/vue-axios.esm.min.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/vue-axios/dist/vue-axios.esm.min.js ***!
+  \**********************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ plugin)
+/* harmony export */ });
+/* module decorator */ module = __webpack_require__.hmd(module);
+function _typeof(e){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function plugin(e,n){if(!e.vueAxiosInstalled){var o=isAxiosLike(n)?migrateToMultipleInstances(n):n;if(isValidConfig(o)){var t=getVueVersion(e);if(t){var i=t<3?registerOnVue2:registerOnVue3;Object.keys(o).forEach((function(n){i(e,n,o[n])})),e.vueAxiosInstalled=!0}else console.error("[vue-axios] unknown Vue version")}else console.error("[vue-axios] configuration is invalid, expected options are either <axios_instance> or { <registration_key>: <axios_instance> }")}}function registerOnVue2(e,n,o){Object.defineProperty(e.prototype,n,{get:function(){return o}}),e[n]=o}function registerOnVue3(e,n,o){e.config.globalProperties[n]=o,e[n]=o}function isAxiosLike(e){return e&&"function"==typeof e.get&&"function"==typeof e.post}function migrateToMultipleInstances(e){return{axios:e,$http:e}}function isValidConfig(e){return"object"===_typeof(e)&&Object.keys(e).every((function(n){return isAxiosLike(e[n])}))}function getVueVersion(e){return e&&e.version&&Number(e.version.split(".")[0])}"object"==("undefined"==typeof exports?"undefined":_typeof(exports))?module.exports=plugin:"function"==typeof define&&__webpack_require__.amdO?define([],(function(){return plugin})):window.Vue&&window.axios&&window.Vue.use&&Vue.use(plugin,window.axios);
+
+/***/ }),
+
 /***/ "./resources/js/components/DashboardComponent.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/DashboardComponent.vue ***!
@@ -64956,73 +65055,224 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.frames, function (frame, index) {
-      return _c("div", { key: index }, [
-        index == 0
-          ? _c(
-              "div",
+    [
+      _vm._l(_vm.frames, function (frame, index) {
+        return _c("div", { key: index }, [
+          index == 0
+            ? _c(
+                "div",
+                [
+                  _c("frame-component", {
+                    attrs: {
+                      descer: true,
+                      subir: false,
+                      color: frame.color,
+                      title: frame.title,
+                      id: frame.id,
+                      posts: frame.posts,
+                    },
+                    on: { "movimentar-post": _vm.movimentar },
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                ],
+                1
+              )
+            : index == 2
+            ? _c(
+                "div",
+                [
+                  _c("frame-component", {
+                    attrs: {
+                      descer: false,
+                      subir: true,
+                      color: frame.color,
+                      title: frame.title,
+                      id: frame.id,
+                      posts: frame.posts,
+                    },
+                    on: { "movimentar-post": _vm.movimentar },
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                ],
+                1
+              )
+            : _c(
+                "div",
+                [
+                  _c("frame-component", {
+                    attrs: {
+                      descer: true,
+                      subir: true,
+                      color: frame.color,
+                      title: frame.title,
+                      id: frame.id,
+                      posts: frame.posts,
+                    },
+                    on: { "movimentar-post": _vm.movimentar },
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                ],
+                1
+              ),
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "position-fixed bottom-0 end-50" }, [
+        _c(
+          "span",
+          {
+            staticClass: "d-inline-block",
+            attrs: {
+              tabindex: "0",
+              "data-bs-toggle": "tooltip",
+              "data-bs-placement": "top",
+              title: "Create new Activity",
+            },
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-lg btn-primary rounded-pill",
+                attrs: {
+                  href: "#",
+                  "data-bs-toggle": "modal",
+                  "data-bs-target": "#novaAtividadeModal",
+                },
+                on: { click: _vm.novaAtividade },
+              },
               [
-                _c("frame-component", {
-                  attrs: {
-                    descer: true,
-                    subir: false,
-                    color: frame.color,
-                    title: frame.title,
-                    id: frame.id,
-                    posts: frame.posts,
-                  },
-                  on: { "movimentar-post": _vm.movimentar },
+                _c("font-awesome-icon", {
+                  attrs: { icon: "fa-solid fa-plus" },
                 }),
-                _vm._v(" "),
-                _c("br"),
-              ],
-              1
-            )
-          : index == 2
-          ? _c(
-              "div",
-              [
-                _c("frame-component", {
-                  attrs: {
-                    descer: false,
-                    subir: true,
-                    color: frame.color,
-                    title: frame.title,
-                    id: frame.id,
-                    posts: frame.posts,
-                  },
-                  on: { "movimentar-post": _vm.movimentar },
-                }),
-                _vm._v(" "),
-                _c("br"),
-              ],
-              1
-            )
-          : _c(
-              "div",
-              [
-                _c("frame-component", {
-                  attrs: {
-                    descer: true,
-                    subir: true,
-                    color: frame.color,
-                    title: frame.title,
-                    id: frame.id,
-                    posts: frame.posts,
-                  },
-                  on: { "movimentar-post": _vm.movimentar },
-                }),
-                _vm._v(" "),
-                _c("br"),
               ],
               1
             ),
-      ])
-    }),
-    0
+          ]
+        ),
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.modal,
+              expression: "modal",
+            },
+          ],
+          staticClass: "modal",
+          attrs: { id: "novaAtividadeModal", tabindex: "-1" },
+        },
+        [
+          _c("div", { staticClass: "modal-dialog" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", { staticClass: "form" }, [
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "label",
+                      { staticClass: "form-label", attrs: { for: "title" } },
+                      [_vm._v("Title:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "title" },
+                      domProps: { value: _vm.title },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-label",
+                        attrs: { for: "description" },
+                      },
+                      [_vm._v("Description:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "description" },
+                      domProps: { value: _vm.description },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-label",
+                        attrs: { for: "scheduledto" },
+                      },
+                      [_vm._v("Scheduled to:")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: { type: "text", id: "scheduledto" },
+                      domProps: { value: _vm.scheduledto },
+                    }),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-bs-dismiss": "modal" },
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button", "data-bs-dismiss": "modal" },
+                    on: { click: _vm.salvarAtividade },
+                  },
+                  [_vm._v("Save")]
+                ),
+              ]),
+            ]),
+          ]),
+        ]
+      ),
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Create New Activity")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close",
+        },
+      }),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -65119,7 +65369,7 @@ var render = function () {
   return _c("div", { staticClass: "card", class: _vm.borda }, [
     _c("div", { staticClass: "card-header text-white", class: _vm.fundo }, [
       _vm._v(
-        "\n        " +
+        "\n            " +
           _vm._s(_vm.index + 1) +
           " - " +
           _vm._s(_vm.post.title) +
@@ -77404,6 +77654,11 @@ Vue.compile = compileToFunctions;
 /******/ 	__webpack_require__.m = __webpack_modules__;
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/amd options */
+/******/ 	(() => {
+/******/ 		__webpack_require__.amdO = {};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
 /******/ 		var deferred = [];
@@ -77470,6 +77725,21 @@ Vue.compile = compileToFunctions;
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/harmony module decorator */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmd = (module) => {
+/******/ 			module = Object.create(module);
+/******/ 			if (!module.children) module.children = [];
+/******/ 			Object.defineProperty(module, 'exports', {
+/******/ 				enumerable: true,
+/******/ 				set: () => {
+/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
+/******/ 				}
+/******/ 			});
+/******/ 			return module;
+/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

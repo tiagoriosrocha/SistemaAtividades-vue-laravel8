@@ -1,7 +1,7 @@
 <template>
     <div class="card" :class="borda">
         <div class="card-header text-white" :class="fundo">
-            {{ index+1 }} - {{ post.title }}  <span class="badge bg-light text-black rounded-pill">#{{ post.id }}</span>
+                {{ index+1 }} - {{ post.title }}  <span class="badge bg-light text-black rounded-pill">#{{ post.id }}</span>
         </div>
         
         <div class="card-body">
