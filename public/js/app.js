@@ -20588,9 +20588,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    'post': []
+    'post': [],
+    'index': Number,
+    'descer': Boolean,
+    'subir': Boolean
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -65214,19 +65221,91 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n        " + _vm._s(_vm.post) + "\n    "),
+  return _c("div", { staticClass: "card", class: _vm.borda }, [
+    _c("div", { staticClass: "card-header text-white", class: _vm.fundo }, [
+      _vm._v(
+        "\n        " +
+          _vm._s(_vm.index + 1) +
+          " - " +
+          _vm._s(_vm.post.title) +
+          "\n    "
+      ),
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("blockquote", { staticClass: "blockquote mb-0" }, [
-        _c("p", [_vm._v(_vm._s(_vm.post.description))]),
-        _vm._v(" "),
-        _c("footer", { staticClass: "blockquote-footer" }, [
-          _vm._v(_vm._s(_vm.post.created_at)),
-        ]),
-      ]),
+      _c("p", [_vm._v(_vm._s(_vm.post.description))]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-footer" }, [
+      _c(
+        "a",
+        { staticClass: "btn btn-sm", class: _vm.botao, attrs: { href: "#" } },
+        [
+          _c("font-awesome-icon", {
+            attrs: { icon: "fa-solid fa-pen-to-square" },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        { staticClass: "btn btn-sm", class: _vm.botao, attrs: { href: "#" } },
+        [_c("font-awesome-icon", { attrs: { icon: "fa-solid fa-trash" } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.descer,
+              expression: "descer",
+            },
+          ],
+          staticClass: "btn btn-sm",
+          class: _vm.botao,
+          attrs: { href: "#" },
+          on: {
+            click: function ($event) {
+              return _vm.$root.$emit("descerPost", _vm.index)
+            },
+          },
+        },
+        [
+          _c("font-awesome-icon", {
+            attrs: { icon: "fa-solid fa-arrow-down" },
+          }),
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.subir,
+              expression: "subir",
+            },
+          ],
+          staticClass: "btn btn-sm",
+          class: _vm.botao,
+          attrs: { href: "#" },
+          on: {
+            click: function ($event) {
+              return _vm.$root.$emit("subirPost", _vm.index)
+            },
+          },
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "fa-solid fa-arrow-up" } })],
+        1
+      ),
     ]),
   ])
 }
