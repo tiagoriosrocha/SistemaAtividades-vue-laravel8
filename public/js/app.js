@@ -20502,6 +20502,15 @@ __webpack_require__.r(__webpack_exports__);
       this.title = "";
       this.description = "";
       this.scheduledto = "";
+    },
+    deletarPost: function deletarPost(post) {
+      axios.post('/post/delete', {
+        'id': post.id
+      }).then(function (response) {
+        return console.log('post deletado');
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     }
   }
 });
@@ -20601,15 +20610,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     deletarPost: function deletarPost(index, post) {
-      var _this = this;
-
-      axios.post('/post/delete', {
-        'id': post.id
-      }).then(function (response) {
-        return _this.posts.splice(index, 1);
-      })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
-      });
+      this.$emit('deletar-post', post);
+      this.posts.splice(index, 1);
     }
   }
 });
@@ -65086,7 +65088,10 @@ var render = function () {
                       id: frame.id,
                       posts: frame.posts,
                     },
-                    on: { "movimentar-post": _vm.movimentar },
+                    on: {
+                      "deletar-post": _vm.deletarPost,
+                      "movimentar-post": _vm.movimentar,
+                    },
                   }),
                   _vm._v(" "),
                   _c("br"),
@@ -65106,7 +65111,10 @@ var render = function () {
                       id: frame.id,
                       posts: frame.posts,
                     },
-                    on: { "movimentar-post": _vm.movimentar },
+                    on: {
+                      "deletar-post": _vm.deletarPost,
+                      "movimentar-post": _vm.movimentar,
+                    },
                   }),
                   _vm._v(" "),
                   _c("br"),
@@ -65125,7 +65133,10 @@ var render = function () {
                       id: frame.id,
                       posts: frame.posts,
                     },
-                    on: { "movimentar-post": _vm.movimentar },
+                    on: {
+                      "deletar-post": _vm.deletarPost,
+                      "movimentar-post": _vm.movimentar,
+                    },
                   }),
                   _vm._v(" "),
                   _c("br"),

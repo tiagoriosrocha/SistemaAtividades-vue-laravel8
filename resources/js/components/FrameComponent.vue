@@ -92,11 +92,8 @@
             },
 
             deletarPost(index, post){                
-                axios.post('/post/delete',{
-                    'id': post.id
-                })
-                .then(response => (this.posts.splice(index,1)))
-                .catch(error => (console.log("resposta erro: " + error)));
+                this.$emit('deletar-post',post)
+                this.posts.splice(index,1)
             }
         }
     }

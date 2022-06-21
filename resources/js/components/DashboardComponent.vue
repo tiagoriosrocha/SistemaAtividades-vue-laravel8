@@ -2,15 +2,15 @@
     <div>
         <div v-for="(frame, index) in frames" :key="index">
             <div v-if="index == 0">
-                <frame-component @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else-if="index == 2">
-                <frame-component @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else>
-                <frame-component @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
         </div>
@@ -104,6 +104,14 @@
                 this.title = ""
                 this.description = ""
                 this.scheduledto = ""
+            },
+
+            deletarPost(post){                
+                axios.post('/post/delete',{
+                    'id': post.id
+                })
+                .then(response => (console.log('post deletado')))
+                .catch(error => (console.log("resposta erro: " + error)));
             }
         }
     }
