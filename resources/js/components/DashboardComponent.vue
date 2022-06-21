@@ -79,13 +79,20 @@
                 console.log("dashboard: movimentar => destino: " + destino)
                 console.log("dashboard: movimentar => objeto: " + JSON.stringify(post))
                 this.$root.$emit('receberPost',post, destino)
+
+                axios.post('/post/movimentar', {
+                    'id': post.id,
+                    'frame_id': destino,
+                })
+                .then(response => (console.log("Post movimentado ok")))
+                .catch(error => (console.log("resposta erro: " + error)));
             },
 
             novaAtividade(){
                 this.modal = true
-                //this.title = ""
-                //this.description = ""
-                //this.scheduledto = ""
+                this.title = ""
+                this.description = ""
+                this.scheduledto = ""
                 console.log("show modal")
             },
 

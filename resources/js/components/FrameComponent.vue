@@ -87,7 +87,6 @@
             addPost(post, destino){
                 if( destino == this.id ){
                     this.posts.push(post)
-                    console.log("adicionado no vetor")
                 }
             },
 

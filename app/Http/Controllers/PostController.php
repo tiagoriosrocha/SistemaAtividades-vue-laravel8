@@ -117,4 +117,23 @@ class PostController extends Controller
         }
         
     }
+
+    public function movimentar(Request $request)
+    {
+        if( isset($request) ){
+            $id = $request->input('id');
+            $frameId = $request->input('frame_id');
+
+            Log::info("movimentando registro: " . $id);
+
+            $post = Post::find($id);
+            $post->frame_id = $frameId;
+            $post->save();
+
+            return response()->json(['resposta' => 'ok'], 200);
+        }else{
+            return response()->json(['resposta' => 'error'], 401);
+        }
+        
+    }
 }

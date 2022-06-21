@@ -20477,12 +20477,20 @@ __webpack_require__.r(__webpack_exports__);
       console.log("dashboard: movimentar => destino: " + destino);
       console.log("dashboard: movimentar => objeto: " + JSON.stringify(post));
       this.$root.$emit('receberPost', post, destino);
+      axios.post('/post/movimentar', {
+        'id': post.id,
+        'frame_id': destino
+      }).then(function (response) {
+        return console.log("Post movimentado ok");
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     },
     novaAtividade: function novaAtividade() {
-      this.modal = true; //this.title = ""
-      //this.description = ""
-      //this.scheduledto = ""
-
+      this.modal = true;
+      this.title = "";
+      this.description = "";
+      this.scheduledto = "";
       console.log("show modal");
     },
     salvarAtividade: function salvarAtividade() {
@@ -20606,7 +20614,6 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost(post, destino) {
       if (destino == this.id) {
         this.posts.push(post);
-        console.log("adicionado no vetor");
       }
     },
     deletarPost: function deletarPost(index, post) {
