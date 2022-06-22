@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Frame;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -28,10 +29,11 @@ class HomeController extends Controller
         $user = Auth::user(); 
         
         $userId = $user->id;
-        $frames = Frame::with(['posts' => function($q) use ($userId) {
+        $frames = Frame::where('user_id',$userId)->with(['posts' => function($q) use ($userId) {
             $q->where('user_id', '=' , $userId);
         }])->get();
 
+        Log::info($frames . "\nUserID: " . $userId);
 
         return view('home', ['user' => $user, 'frames' => $frames]);
     }

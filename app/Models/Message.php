@@ -13,6 +13,13 @@ class Message extends Model
 
     protected $table = 'messages';
 
+    protected $fillable = [
+        'title',
+        'text',
+        'user_id',
+        'post_id'
+    ];
+
     public function post()
     {
         return $this->belongsTo(Post::class); //pertence a

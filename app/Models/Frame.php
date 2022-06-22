@@ -13,6 +13,12 @@ class Frame extends Model
 
     protected $table = 'frames';
 
+    protected $fillable = [
+        'title',
+        'color',
+        'user_id'
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class); //tem muitas

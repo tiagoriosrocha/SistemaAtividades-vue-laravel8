@@ -12,9 +12,9 @@
             <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="View Post">
                 <a class="btn btn-sm" @click="exibirPost(index)" data-bs-toggle="modal" data-bs-target="#exibirAtividade" :class="botao"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></a>
             </span>
-            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Post">
+            <!-- <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Post">
                 <a class="btn btn-sm" @click="editarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
-            </span>
+            </span> -->
             <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Post">
                 <a class="btn btn-sm" @click="deletarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
             </span>

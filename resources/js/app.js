@@ -12,7 +12,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret, faMagnifyingGlass, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import Vue from 'vue';
 
 library.add(faUserSecret)
@@ -22,6 +22,7 @@ library.add(faArrowUp)
 library.add(faArrowDown)
 library.add(faPlus)
 library.add(faMagnifyingGlass)
+library.add(faFloppyDisk)
 
 /**
  * The following block of code may be used to automatically register your
@@ -38,7 +39,7 @@ Vue.component('frame-component', require('./components/FrameComponent.vue').defa
 Vue.component('post-component', require('./components/PostComponent.vue').default);
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
-Vue.component('details-post-component', require('./components/ShowPostDetailsComponent.vue').default);
+Vue.component('details-post-component', require('./components/ShowPostComponent.vue').default);
 Vue.component('create-post-component', require('./components/CreatePostComponent.vue').default);
 Vue.use(VueAxios, axios);
 

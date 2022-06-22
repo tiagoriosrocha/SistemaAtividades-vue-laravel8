@@ -97,9 +97,17 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $campo = $request->input('campo');
+        $valor = $request->input('valor');
+
+        $post = Post::where('id',$id)->get()->first();
+        $post->$campo = $valor;
+        $post->save();
+
+        return response()->json(["respota" => "ok"],200);
     }
 
     /**

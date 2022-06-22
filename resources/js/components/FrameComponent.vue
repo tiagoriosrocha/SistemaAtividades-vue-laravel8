@@ -4,7 +4,10 @@
             <div class="col-md-12">
                 <div class="card" :class="borda">
                     <div class="card-header" :class="borda">
-                        <p :class="letra">{{ title }}</p>
+                        <p :class="letra">
+                            {{ title }}  
+                            <!-- <span class="badge bg-black text-white rounded-pill">#{{ id }}</span> -->
+                        </p>
                     </div>
 
                     <div class="card-body">
