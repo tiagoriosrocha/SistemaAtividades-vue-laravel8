@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3" v-for="(post, index) in listaPosts" :key="post.id" :post="post">
-                                <post-component @deletar-post="deletarPost" @descer-post="descerPost" @subir-post="subirPost" :color="color" :index="index" :post="post" :descer="descer" :subir="subir"></post-component>
+                                <post-component @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @descer-post="descerPost" @subir-post="subirPost" :color="color" :index="index" :post="post" :descer="descer" :subir="subir"></post-component>
                                 <br>
                             </div>
                         </div>
@@ -36,7 +36,8 @@
         
         data() {
             return {
-                listaPosts: []
+                listaPosts: [],
+                postShow : []
             }
         },
         
@@ -93,6 +94,14 @@
             deletarPost(index, post){                
                 this.$emit('deletar-post',post)
                 this.posts.splice(index,1)
+            },
+
+            exibirPost(index, post){
+                this.$emit('exibir-post',post)
+            },
+
+            editarPost(index, post){
+
             }
         }
     }

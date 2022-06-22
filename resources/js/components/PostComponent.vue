@@ -9,11 +9,21 @@
         </div>
 
         <div class="card-footer">
-            <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></a>
-            <a href="#" class="btn btn-sm" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
-            <a href="#" class="btn btn-sm" @click="deletarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
-            <a href="#" class="btn btn-sm" @click="descerPost(index)" v-show="descer" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-down" /></a>
-            <a href="#" class="btn btn-sm" @click="subirPost(index)" v-show="subir" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-up" /></a>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="View Post">
+                <a class="btn btn-sm" @click="exibirPost(index)" data-bs-toggle="modal" data-bs-target="#exibirAtividade" :class="botao"><font-awesome-icon icon="fa-solid fa-magnifying-glass" /></a>
+            </span>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Post">
+                <a class="btn btn-sm" @click="editarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></a>
+            </span>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Post">
+                <a class="btn btn-sm" @click="deletarPost(index)" :class="botao"><font-awesome-icon icon="fa-solid fa-trash" /></a>
+            </span>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Down Post">
+                <a class="btn btn-sm" @click="descerPost(index)" v-show="descer" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-down" /></a>
+            </span>
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Up Post">
+                <a class="btn btn-sm" @click="subirPost(index)" v-show="subir" :class="botao"><font-awesome-icon icon="fa-solid fa-arrow-up" /></a>
+            </span>
         </div>
     </div>
 </template>
@@ -40,6 +50,14 @@
             deletarPost(index){
                 console.log("PostComponent: Deletar")
                 this.$emit('deletar-post',index, this.post)
+            },
+            exibirPost(index){
+                console.log("PostComponent: Exibir")
+                this.$emit('exibir-post',index, this.post)
+            },
+            editarPost(index){
+                console.log("PostComponent: Editar")
+                this.$emit('editar-post',index, this.post)
             }
         },
         

@@ -38,6 +38,7 @@ Vue.component('frame-component', require('./components/FrameComponent.vue').defa
 Vue.component('post-component', require('./components/PostComponent.vue').default);
 Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('post-details-component', require('./components/ShowPostDetailsComponent.vue').default);
 Vue.use(VueAxios, axios);
 
 /**

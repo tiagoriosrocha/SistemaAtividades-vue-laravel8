@@ -2,21 +2,21 @@
     <div>
         <div v-for="(frame, index) in frames" :key="index">
             <div v-if="index == 0">
-                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else-if="index == 2">
-                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component  @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else>
-                <frame-component @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component  @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
         </div>
 
         <div class="position-fixed bottom-0 end-50">
-            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Activity">
+            <span class="d-inline-block" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Create new Post">
                 <a href="#" class="btn btn-lg btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#novaAtividadeModal" @click="novaAtividade">
                     <font-awesome-icon icon="fa-solid fa-plus" />
                 </a>
@@ -27,7 +27,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create New Activity</h5>
+                    <h5 class="modal-title">Create New Post</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -53,10 +53,14 @@
                 </div>
             </div>
         </div>
+
+        <post-details-component></post-details-component>
     </div>
 </template>
 
 <script>
+    import moment from 'moment';
+
     export default {
         props: {
             'frames' : [],
@@ -69,7 +73,14 @@
                 description: "Descrição",
                 scheduledto: "2022-07-30 13:00:00",
                 post: [],
-                destino: Number
+                destino: Number,
+                postShow: []
+            }
+        },
+
+        filters: {
+            filtroDataHora: function (date) {
+                return moment(date).format('DD/MM/YYYY H:mm');
             }
         },
         
@@ -119,6 +130,19 @@
                 })
                 .then(response => (console.log('post deletado')))
                 .catch(error => (console.log("resposta erro: " + error)));
+            },
+
+            exibirPost(post){
+                axios.get('/post/' + post.id)
+                .then(response => {
+                    this.postShow = response.data
+                    this.$root.$emit('exibir-post',this.postShow)
+                 })
+                .catch(error => (console.log("resposta erro: " + error)));
+            },
+
+            editarPost(post){
+
             }
         }
     }

@@ -68,9 +68,15 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($postId)
     {
-        
+        $post = Post::where('id', $postId)->with(['messages' => function($q) use ($postId) {
+            $q->where('post_id', '=' , $postId);
+        }])->get()->first();
+
+        Log::info("post: " . $post);
+
+        return response()->json($post,200);
     }
 
     /**
