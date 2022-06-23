@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('status_posts', function($table){
-            $table->unsignedBigInteger('status_id'); 
+        Schema::table('situation_posts', function($table){
+            $table->unsignedBigInteger('situation_id'); 
             $table->unsignedBigInteger('post_id');
             
-            $table->foreign('status_id')->references('id')->on('status');
+            $table->foreign('situation_id')->references('id')->on('situation');
             $table->foreign('post_id')->references('id')->on('posts');
         });
     }

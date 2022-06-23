@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('status_posts', function (Blueprint $table) {
+        Schema::create('situation_posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
         });

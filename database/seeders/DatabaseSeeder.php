@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Frame;
 use App\Models\Post;
 use App\Models\Message;
+use App\Models\Situation;
+use App\Models\SituationPost;
 
 class DatabaseSeeder extends Seeder
 {
@@ -77,7 +79,43 @@ class DatabaseSeeder extends Seeder
             'post_id' => $post1->id
         ]);
 
+        $status1 = Situation::create([
+             'title' => 'Urgent',
+             'color' => 'danger',
+             'icon' => 'fa-solid fa-circle-exclamation'
+        ]);
         
-        
+        $status2 = Situation::create([
+            'title' => 'Attention',
+            'color' => 'orange',
+            'icon' => 'fa-solid fa-bomb'
+       ]);
+
+       $status3 = Situation::create([
+            'title' => 'Late',
+            'color' => 'danger',
+            'icon' => 'fa-solid fa-alarm-clock'
+        ]);
+
+        $status4 = Situation::create([
+            'title' => 'Quiet',
+            'color' => 'danger',
+            'icon' => 'fa-solid fa-mug-hot'
+        ]);
+
+        $statuspost = SituationPost::create([
+            'situation_id' => $status1->id,
+            'post_id' => $post1->id
+        ]);
+
+        $statuspost = SituationPost::create([
+            'situation_id' => $status2->id,
+            'post_id' => $post1->id
+        ]);
+
+        $statuspost = SituationPost::create([
+            'situation_id' => $status3->id,
+            'post_id' => $post1->id
+        ]);
     }
 }

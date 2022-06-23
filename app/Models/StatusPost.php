@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Post;
 
-class Status extends Model
+class StatusPost extends Model
 {
     use HasFactory;
 
-    
 }

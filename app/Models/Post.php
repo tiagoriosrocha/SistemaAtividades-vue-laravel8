@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Message;
 use App\Models\Frame;
 use App\Models\User;
-use App\Models\Status;
+use App\Models\Situation;
 
 class Post extends Model
 {
@@ -38,8 +38,8 @@ class Post extends Model
         return $this->belongsTo(User::class); //pertence a
     }
 
-    public function status()
+    public function situations()
     {
-        return $this->belongsToMany(Status::class);
+        return $this->belongsToMany(Situation::class, 'situation_posts', 'post_id', 'situation_id');
     }
 }
