@@ -41,6 +41,7 @@ Vue.component('dashboard-component', require('./components/DashboardComponent.vu
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('details-post-component', require('./components/ShowPostComponent.vue').default);
 Vue.component('create-post-component', require('./components/CreatePostComponent.vue').default);
+Vue.component('create-message-component', require('./components/CreateMessageComponent.vue').default);
 Vue.use(VueAxios, axios);
 
 /**

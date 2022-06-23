@@ -67,8 +67,10 @@
                         </div>
                     </div>
                 </div>
+                <create-message-component v-if="exibirFormMensagem" @created-message="mensagemCriada" :postId="postShow.id"></create-message-component>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @click="criarMensagem">New Message</button>
                 <button type="button" class="btn btn-secondary" @click="fecharModal" data-bs-dismiss="modal">Close</button>
             </div>
             </div>
@@ -91,7 +93,8 @@ export default {
             editarScheduledto : false,
             titleText : "",
             descriptionText : "",
-            scheduledtoText : ""
+            scheduledtoText : "",
+            exibirFormMensagem : false,
         }
     },
 
@@ -131,6 +134,7 @@ export default {
             this.editarTitle = false
             this.editarDescription = false
             this.editarScheduledto = false
+            this.exibirFormMensagem = false
         },
 
         salvarTitle(){
@@ -163,6 +167,16 @@ export default {
                 this.$root.$emit('updated-post', post)
             })
             .catch(error => (console.log("resposta erro: " + error)));
+        },
+
+        criarMensagem(){
+            this.exibirFormMensagem = true
+        },
+
+        mensagemCriada(message){
+            this.exibirFormMensagem = false
+            console.log("Mensagem adicionada: " + JSON.stringify(message))
+            this.postShow.messages.push(message)
         }
     }
 }

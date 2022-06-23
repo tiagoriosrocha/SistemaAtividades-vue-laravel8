@@ -27,3 +27,5 @@ Route::post('/post/delete', [App\Http\Controllers\PostController::class, 'destro
 Route::post('/post/movimentar', [App\Http\Controllers\PostController::class, 'movimentar']);
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show']);
 Route::post('/post/editar',[App\Http\Controllers\PostController::class, 'update']);
+
+Route::post('/message',[App\Http\Controllers\MessageController::class, 'store']);
