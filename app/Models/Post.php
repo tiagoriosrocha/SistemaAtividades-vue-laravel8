@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Message;
 use App\Models\Frame;
 use App\Models\User;
+use App\Models\Status;
 
 class Post extends Model
 {
@@ -35,5 +36,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class); //pertence a
+    }
+
+    public function status()
+    {
+        return $this->belongsToMany(Status::class);
     }
 }

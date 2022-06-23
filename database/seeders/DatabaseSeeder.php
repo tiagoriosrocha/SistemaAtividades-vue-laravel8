@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             'post_id' => $post1->id
         ]);
 
-
+        
         
     }
 }
