@@ -52,6 +52,11 @@
                 <div class="mb-1">
                     <label for="scheduledto" class="form-label">Atualizado em: {{ postShow.updated_at | filtroDataHora}}</label>
                 </div>
+                <hr>
+                <span v-for="situation in situations" :key="situation.id">
+                    <input type="checkbox" :checked="temSituacao(situation)" class="btn-check" :id="'btn-check-' + situation.id" >
+                    <label class="btn btn-sm btn-outline-primary" :for="'btn-check-' + situation.id">{{ situation.title }}</label>
+                </span>
                 <div v-if="qtdMsg > 0">
                     <hr>
                     <div style="height: 200px; overflow-y: scroll;">
@@ -199,6 +204,17 @@ export default {
             })
             .catch(error => (console.log("resposta erro: " + error)));
         },
+
+        temSituacao(situation){
+            var result = false
+            for(var i=0; i<this.postShow.situations.length; i++){
+                var umaSituacao = this.postShow.situations[i]
+                if(umaSituacao.id == situation.id)
+                    result = true
+            }
+            console.log("Situation: " + situation.title + " = " + result)
+            return result
+        }
     }
 }
 </script>
