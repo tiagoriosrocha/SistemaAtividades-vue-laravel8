@@ -20965,6 +20965,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -66395,7 +66397,12 @@ var render = function () {
         _c("div", { staticClass: "modal-content" }, [
           _c("div", { staticClass: "modal-header" }, [
             _c("h5", { staticClass: "modal-title" }, [
-              _vm._v("Show Post Details #" + _vm._s(_vm.postShow.id)),
+              _vm._v(
+                "#" +
+                  _vm._s(_vm.postShow.id) +
+                  " - " +
+                  _vm._s(_vm.postShow.title)
+              ),
             ]),
             _vm._v(" "),
             _c("button", {
@@ -66412,6 +66419,30 @@ var render = function () {
             "div",
             { staticClass: "modal-body" },
             [
+              _vm._l(_vm.situations, function (situation) {
+                return _c("span", { key: situation.id }, [
+                  _c("input", {
+                    staticClass: "btn-check",
+                    attrs: {
+                      type: "checkbox",
+                      id: "btn-check-" + situation.id,
+                    },
+                    domProps: { checked: _vm.temSituacao(situation) },
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "label",
+                    {
+                      staticClass: "btn btn-sm btn-outline-primary",
+                      attrs: { for: "btn-check-" + situation.id },
+                    },
+                    [_vm._v(_vm._s(situation.title))]
+                  ),
+                ])
+              }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
               _c("div", { staticClass: "mb-1" }, [
                 !_vm.editarTitle
                   ? _c("div", [
@@ -66702,30 +66733,6 @@ var render = function () {
                   ]
                 ),
               ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._l(_vm.situations, function (situation) {
-                return _c("span", { key: situation.id }, [
-                  _c("input", {
-                    staticClass: "btn-check",
-                    attrs: {
-                      type: "checkbox",
-                      id: "btn-check-" + situation.id,
-                    },
-                    domProps: { checked: _vm.temSituacao(situation) },
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "label",
-                    {
-                      staticClass: "btn btn-sm btn-outline-primary",
-                      attrs: { for: "btn-check-" + situation.id },
-                    },
-                    [_vm._v(_vm._s(situation.title))]
-                  ),
-                ])
-              }),
               _vm._v(" "),
               _vm.qtdMsg > 0
                 ? _c("div", [

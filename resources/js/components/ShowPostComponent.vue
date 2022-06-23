@@ -3,10 +3,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Show Post Details #{{ postShow.id }}</h5>
+                <h5 class="modal-title">#{{ postShow.id }} - {{ postShow.title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                
+                <span v-for="situation in situations" :key="situation.id">
+                    <input type="checkbox" :checked="temSituacao(situation)" class="btn-check" :id="'btn-check-' + situation.id" >
+                    <label class="btn btn-sm btn-outline-primary" :for="'btn-check-' + situation.id">{{ situation.title }}</label>
+                </span>
+                <hr>
                 <div class="mb-1">
                     <div v-if="!editarTitle">
                         <label class="form-label">
@@ -52,11 +58,7 @@
                 <div class="mb-1">
                     <label for="scheduledto" class="form-label">Atualizado em: {{ postShow.updated_at | filtroDataHora}}</label>
                 </div>
-                <hr>
-                <span v-for="situation in situations" :key="situation.id">
-                    <input type="checkbox" :checked="temSituacao(situation)" class="btn-check" :id="'btn-check-' + situation.id" >
-                    <label class="btn btn-sm btn-outline-primary" :for="'btn-check-' + situation.id">{{ situation.title }}</label>
-                </span>
+                
                 <div v-if="qtdMsg > 0">
                     <hr>
                     <div style="height: 200px; overflow-y: scroll;">
