@@ -159,8 +159,8 @@ export default {
             })
             .then(response => {
                 console.log(response)
-                //var post = response.data
-                //this.$emit('novo-post', post)
+                var post = response.data
+                this.$root.$emit('updated-post', post)
             })
             .catch(error => (console.log("resposta erro: " + error)));
         }

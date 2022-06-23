@@ -53,10 +53,12 @@
         mounted() {
             console.log('Component mounted.')
             this.$root.$on('receberPost', this.addPost)
+            this.$root.$on('updated-post', this.updatePost)
         },
         
         created(){
             this.listaPosts = this.posts
+            this.ordenarPosts()
         },
         
         computed: {
@@ -91,6 +93,7 @@
             addPost(post, destino){
                 if( destino == this.id ){
                     this.posts.push(post)
+                    this.ordenarPosts()
                 }
             },
 
@@ -103,8 +106,32 @@
                 this.$emit('exibir-post',post)
             },
 
-            editarPost(index, post){
+            ordenarPosts(){
+                this.listaPosts.sort(function (a, b) {
+                if (a.id > b.id) {
+                    return 1;
+                }
+                if (a.id < b.id) {
+                    return -1;
+                }
+                // a must be equal to b
+                return 0;
+                });
+            },
 
+            updatePost(post){
+                for(var i=0; i<this.listaPosts.length; i++){
+                    var umPost = this.listaPosts[i]
+                    if( umPost.id == post.id ){
+                        this.listaPosts.splice(i,1)
+                        this.listaPosts.push(post)
+                        this.ordenarPosts()
+                    }
+                }
+            },
+
+            editarPost(index, post){
+                
             }
         }
     }

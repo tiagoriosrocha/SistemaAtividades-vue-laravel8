@@ -20574,8 +20574,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         return console.log("resposta erro: " + error);
       });
-    },
-    editarPost: function editarPost(post) {}
+    }
   }
 });
 
@@ -20644,9 +20643,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     console.log('Component mounted.');
     this.$root.$on('receberPost', this.addPost);
+    this.$root.$on('updated-post', this.updatePost);
   },
   created: function created() {
     this.listaPosts = this.posts;
+    this.ordenarPosts();
   },
   computed: {
     borda: function borda() {
@@ -20674,6 +20675,7 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost(post, destino) {
       if (destino == this.id) {
         this.posts.push(post);
+        this.ordenarPosts();
       }
     },
     deletarPost: function deletarPost(index, post) {
@@ -20682,6 +20684,31 @@ __webpack_require__.r(__webpack_exports__);
     },
     exibirPost: function exibirPost(index, post) {
       this.$emit('exibir-post', post);
+    },
+    ordenarPosts: function ordenarPosts() {
+      this.listaPosts.sort(function (a, b) {
+        if (a.id > b.id) {
+          return 1;
+        }
+
+        if (a.id < b.id) {
+          return -1;
+        } // a must be equal to b
+
+
+        return 0;
+      });
+    },
+    updatePost: function updatePost(post) {
+      for (var i = 0; i < this.listaPosts.length; i++) {
+        var umPost = this.listaPosts[i];
+
+        if (umPost.id == post.id) {
+          this.listaPosts.splice(i, 1);
+          this.listaPosts.push(post);
+          this.ordenarPosts();
+        }
+      }
     },
     editarPost: function editarPost(index, post) {}
   }
@@ -20930,13 +20957,17 @@ __webpack_require__.r(__webpack_exports__);
       this.persistirUpdate('scheduledto', this.postShow.scheduledto);
     },
     persistirUpdate: function persistirUpdate(campo, valor) {
+      var _this = this;
+
       axios.post('/post/editar', {
         'id': this.postShow.id,
         'campo': campo,
         'valor': valor
       }).then(function (response) {
-        console.log(response); //var post = response.data
-        //this.$emit('novo-post', post)
+        console.log(response);
+        var post = response.data;
+
+        _this.$root.$emit('updated-post', post);
       })["catch"](function (error) {
         return console.log("resposta erro: " + error);
       });
@@ -65667,7 +65698,6 @@ var render = function () {
                     },
                     on: {
                       "exibir-post": _vm.exibirPost,
-                      "editar-post": _vm.editarPost,
                       "deletar-post": _vm.deletarPost,
                       "movimentar-post": _vm.movimentar,
                     },
@@ -65692,7 +65722,6 @@ var render = function () {
                     },
                     on: {
                       "exibir-post": _vm.exibirPost,
-                      "editar-post": _vm.editarPost,
                       "deletar-post": _vm.deletarPost,
                       "movimentar-post": _vm.movimentar,
                     },
@@ -65716,7 +65745,6 @@ var render = function () {
                     },
                     on: {
                       "exibir-post": _vm.exibirPost,
-                      "editar-post": _vm.editarPost,
                       "deletar-post": _vm.deletarPost,
                       "movimentar-post": _vm.movimentar,
                     },

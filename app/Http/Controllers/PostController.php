@@ -107,7 +107,7 @@ class PostController extends Controller
         $post->$campo = $valor;
         $post->save();
 
-        return response()->json(["respota" => "ok"],200);
+        return response()->json($post,200);
     }
 
     /**

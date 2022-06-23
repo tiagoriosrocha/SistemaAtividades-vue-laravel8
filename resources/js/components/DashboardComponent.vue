@@ -2,15 +2,15 @@
     <div>
         <div v-for="(frame, index) in frames" :key="index">
             <div v-if="index == 0">
-                <frame-component @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component @exibir-post="exibirPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="false" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else-if="index == 2">
-                <frame-component  @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component  @exibir-post="exibirPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="false" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
             <div v-else>
-                <frame-component  @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
+                <frame-component  @exibir-post="exibirPost" @deletar-post="deletarPost" @movimentar-post="movimentar" :descer="true" :subir="true" :color="frame.color" :title="frame.title" :id="frame.id" :posts="frame.posts"></frame-component>
                 <br>
             </div>
         </div>
@@ -98,9 +98,6 @@ export default {
             .catch(error => (console.log("resposta erro: " + error)));
         },
 
-        editarPost(post){
-
-        }
     }
 }
 </script>
