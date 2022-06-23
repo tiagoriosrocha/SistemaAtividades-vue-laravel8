@@ -72,7 +72,7 @@ class PostController extends Controller
     {
         $post = Post::where('id', $postId)->with(['messages' => function($q) use ($postId) {
             $q->where('post_id', '=' , $postId);
-        }])->get()->first();
+        }, 'situations'])->get()->first();
 
         Log::info("post: " . $post);
 

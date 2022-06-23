@@ -20972,7 +20972,8 @@ __webpack_require__.r(__webpack_exports__);
       titleText: "",
       descriptionText: "",
       scheduledtoText: "",
-      exibirFormMensagem: false
+      exibirFormMensagem: false,
+      situations: []
     };
   },
   mounted: function mounted() {
@@ -20985,9 +20986,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addPost: function addPost(post) {
+      var _this = this;
+
       this.postShow = post;
       this.qtdMsg = post.messages.length;
       console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow));
+      axios.get('/situations').then(function (response) {
+        _this.situations = response.data;
+        console.log('Situations: ' + JSON.stringify(_this.situations));
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     },
     criarFormTitle: function criarFormTitle() {
       this.titleText = this.postShow.title;
@@ -21023,7 +21032,7 @@ __webpack_require__.r(__webpack_exports__);
       this.persistirUpdate('scheduledto', this.postShow.scheduledto);
     },
     persistirUpdate: function persistirUpdate(campo, valor) {
-      var _this = this;
+      var _this2 = this;
 
       axios.post('/post/editar', {
         'id': this.postShow.id,
@@ -21033,7 +21042,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
         var post = response.data;
 
-        _this.$root.$emit('updated-post', post);
+        _this2.$root.$emit('updated-post', post);
       })["catch"](function (error) {
         return console.log("resposta erro: " + error);
       });
@@ -21048,15 +21057,15 @@ __webpack_require__.r(__webpack_exports__);
       this.postShow.messages.push(message);
     },
     deletarMensagem: function deletarMensagem(index) {
-      var _this2 = this;
+      var _this3 = this;
 
       var id = this.postShow.messages[index].id;
       axios.post('/message/delete', {
         'id': id
       }).then(function (response) {
-        _this2.postShow.messages.splice(index, 1);
+        _this3.postShow.messages.splice(index, 1);
 
-        _this2.qtdMsg--;
+        _this3.qtdMsg--;
       })["catch"](function (error) {
         return console.log("resposta erro: " + error);
       });

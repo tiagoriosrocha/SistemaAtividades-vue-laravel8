@@ -95,6 +95,7 @@ export default {
             descriptionText : "",
             scheduledtoText : "",
             exibirFormMensagem : false,
+            situations : []
         }
     },
 
@@ -113,6 +114,13 @@ export default {
             this.postShow = post
             this.qtdMsg = post.messages.length
             console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow))
+
+            axios.get('/situations')
+            .then(response => {
+                this.situations = response.data
+                console.log('Situations: ' + JSON.stringify(this.situations))
+            })
+            .catch(error => (console.log("resposta erro: " + error)));
         },
 
         criarFormTitle(){
