@@ -61,7 +61,7 @@
                                     <h5 class="card-title">Title: {{ msg.title }}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">Data: {{ msg.created_at | filtroDataHora }}</h6>
                                     <p class="card-text">Mensagem: {{ msg.text }}</p>
-                                    <a href="#" class="card-link">Deletar</a>
+                                    <a class="btn btn-outlined btn-sm btn-outline-danger" @click="deletarMensagem(index)">Deletar</a>
                                 </div>
                             </div>
                         </div>
@@ -175,9 +175,22 @@ export default {
 
         mensagemCriada(message){
             this.exibirFormMensagem = false
+            this.qtdMsg++
             console.log("Mensagem adicionada: " + JSON.stringify(message))
             this.postShow.messages.push(message)
-        }
+        },
+
+        deletarMensagem(index){
+            var id = this.postShow.messages[index].id
+            axios.post('/message/delete', {
+                'id': id,
+            })
+            .then(response => {
+                this.postShow.messages.splice(index,1)
+                this.qtdMsg--
+            })
+            .catch(error => (console.log("resposta erro: " + error)));
+        },
     }
 }
 </script>

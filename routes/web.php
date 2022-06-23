@@ -29,3 +29,4 @@ Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show']);
 Route::post('/post/editar',[App\Http\Controllers\PostController::class, 'update']);
 
 Route::post('/message',[App\Http\Controllers\MessageController::class, 'store']);
+Route::post('/message/delete',[App\Http\Controllers\MessageController::class, 'destroy']);

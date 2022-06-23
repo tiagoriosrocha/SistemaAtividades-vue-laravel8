@@ -21043,8 +21043,23 @@ __webpack_require__.r(__webpack_exports__);
     },
     mensagemCriada: function mensagemCriada(message) {
       this.exibirFormMensagem = false;
+      this.qtdMsg++;
       console.log("Mensagem adicionada: " + JSON.stringify(message));
       this.postShow.messages.push(message);
+    },
+    deletarMensagem: function deletarMensagem(index) {
+      var _this2 = this;
+
+      var id = this.postShow.messages[index].id;
+      axios.post('/message/delete', {
+        'id': id
+      }).then(function (response) {
+        _this2.postShow.messages.splice(index, 1);
+
+        _this2.qtdMsg--;
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     }
   }
 });
@@ -66711,8 +66726,13 @@ var render = function () {
                                 _c(
                                   "a",
                                   {
-                                    staticClass: "card-link",
-                                    attrs: { href: "#" },
+                                    staticClass:
+                                      "btn btn-outlined btn-sm btn-outline-danger",
+                                    on: {
+                                      click: function ($event) {
+                                        return _vm.deletarMensagem(index)
+                                      },
+                                    },
                                   },
                                   [_vm._v("Deletar")]
                                 ),

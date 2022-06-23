@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class MessageController extends Controller
 {
@@ -97,8 +98,19 @@ class MessageController extends Controller
      * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(Request $request)
     {
-        //
+        if( isset($request) ){
+            $id = $request->input('id');
+
+            Log::info("Mensagem código: " . $id);
+
+            $message = Message::find($id);
+            $message->delete($id);
+
+            return response()->json(['resposta' => 'ok'], 200);
+        }else{
+            return response()->json(['resposta' => 'error'], 401);
+        }
     }
 }
