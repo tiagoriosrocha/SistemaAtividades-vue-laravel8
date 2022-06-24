@@ -20738,11 +20738,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     descerPost: function descerPost(index) {
-      this.$emit('movimentar-post', this.id, this.id + 10, this.posts[index]);
+      //gambiarra pra funcionar no heroku, não sei pq os primary keys estão incrementando de 10 em 10
+      this.$emit('movimentar-post', this.id, this.id + 1, this.posts[index]);
       this.posts.splice(index, 1);
     },
     subirPost: function subirPost(index) {
-      this.$emit('movimentar-post', this.id, this.id - 10, this.posts[index]);
+      //gambiarra pra funcionar no heroku, não sei pq os primary keys estão incrementando de 10 em 10
+      this.$emit('movimentar-post', this.id, this.id - 1, this.posts[index]);
       this.posts.splice(index, 1);
     },
     addPost: function addPost(post, destino) {
