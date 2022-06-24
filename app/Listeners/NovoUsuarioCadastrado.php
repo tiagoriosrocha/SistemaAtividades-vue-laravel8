@@ -37,26 +37,26 @@ class NovoUsuarioCadastrado
         //CRIANDO O AMBIENTE INICIAL COM 3 FRAMES, 2 POSTS, 2 COMENTÁRIOS
 
         $framePlanejado = Frame::create([
-            'title' => 'Planejado',
+            'title' => 'Planning',
             'color' => 'primary',
             'user_id' => $user->id
         ]);
 
         $frameExecutando = Frame::create([
-            'title' => 'Executando',
+            'title' => 'Running',
             'color' => 'secondary',
             'user_id' => $user->id
         ]);
 
         $frameConcluido = Frame::create([
-            'title' => 'Concluido',
+            'title' => 'Done',
             'color' => 'info',
             'user_id' => $user->id
         ]);
 
         $post1 = Post::create([
-            'title' => 'Meu primeiro post',
-            'description' => 'meu primeiro post desc',
+            'title' => 'My first post',
+            'description' => 'My first post description',
             'scheduledto' => '2022-12-31 23:59:00',
             'status' => '#urgente',
             'user_id' => $user->id,
@@ -64,8 +64,8 @@ class NovoUsuarioCadastrado
         ]);
 
         $post2 = Post::create([
-            'title' => 'Meu segundo post',
-            'description' => 'meu segundo post desc',
+            'title' => 'My second post',
+            'description' => 'My second post description',
             'scheduledto' => '2023-12-31 23:59:00',
             'status' => '#tranquilo',
             'user_id' => $user->id,
@@ -73,15 +73,15 @@ class NovoUsuarioCadastrado
         ]);
 
         $comentario1 = Message::create([
-            'title' => 'Meu primeiro comentário',
-            'text' => 'Meu primeiro comentário desc',
+            'title' => 'My first comment',
+            'text' => 'My first comment text',
             'user_id' => $user->id,
             'post_id' => $post1->id
         ]);
 
         $comentario2 = Message::create([
-            'title' => 'Meu segundo comentário',
-            'text' => 'Meu segundo comentário desc',
+            'title' => 'My second comment',
+            'text' => 'My second comment text',
             'user_id' => $user->id,
             'post_id' => $post1->id
         ]);

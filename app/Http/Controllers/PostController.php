@@ -148,6 +148,26 @@ class PostController extends Controller
         }else{
             return response()->json(['resposta' => 'error'], 401);
         }
-        
+    }
+
+    public function setSituation(Request $request){
+        if( isset($request) ){
+            $post_id = $request->input('post_id');
+            $situation_id = $request->input('situation_id');
+            $habilitar = $request->input('habilitar');
+
+            $post = Post::find($post_id);
+
+            if($habilitar){
+                $post->situations()->attach($situation_id);
+            }else{
+                $post->situations()->detach($situation_id);
+            }
+            
+
+            return response()->json(['resposta' => 'ok'], 200);
+        }else{
+            return response()->json(['resposta' => 'error'], 401);
+        }
     }
 }

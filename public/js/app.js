@@ -20967,6 +20967,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -20995,7 +20998,13 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost(post) {
       var _this = this;
 
-      this.postShow = post;
+      //this.postShow = post
+      axios.get('/post/' + post.id).then(function (response) {
+        _this.postShow = response.data;
+        console.log('ShowPostComponent: buscando post: ' + JSON.stringify(_this.postShow));
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
       this.qtdMsg = post.messages.length;
       console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow));
       axios.get('/situations').then(function (response) {
@@ -21087,6 +21096,20 @@ __webpack_require__.r(__webpack_exports__);
 
       console.log("Situation: " + situation.title + " = " + result);
       return result;
+    },
+    alterarSituation: function alterarSituation(situation) {
+      console.log("post: " + this.postShow.id);
+      console.log("situation: " + situation.id);
+      console.log("habilitar: " + !this.temSituacao(situation));
+      axios.post('/post/situation/edit', {
+        'post_id': this.postShow.id,
+        'situation_id': situation.id,
+        'habilitar': !this.temSituacao(situation)
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        return console.log("resposta erro: " + error);
+      });
     }
   }
 });
@@ -21128,8 +21151,13 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fort
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowUp);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faArrowDown);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlus);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faMinus);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faMagnifyingGlass);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faFloppyDisk);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faCircleExclamation);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faBomb);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faMugHot);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faClock);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -66435,8 +66463,19 @@ var render = function () {
                     {
                       staticClass: "btn btn-sm btn-outline-primary",
                       attrs: { for: "btn-check-" + situation.id },
+                      on: {
+                        click: function ($event) {
+                          return _vm.alterarSituation(situation)
+                        },
+                      },
                     },
-                    [_vm._v(_vm._s(situation.title))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(situation.title) +
+                          "\n                "
+                      ),
+                    ]
                   ),
                 ])
               }),
@@ -66710,7 +66749,7 @@ var render = function () {
                   { staticClass: "form-label", attrs: { for: "scheduledto" } },
                   [
                     _vm._v(
-                      "Criado em: " +
+                      "Created at: " +
                         _vm._s(
                           _vm._f("filtroDataHora")(_vm.postShow.created_at)
                         )
@@ -66725,7 +66764,7 @@ var render = function () {
                   { staticClass: "form-label", attrs: { for: "scheduledto" } },
                   [
                     _vm._v(
-                      "Atualizado em: " +
+                      "Updated at: " +
                         _vm._s(
                           _vm._f("filtroDataHora")(_vm.postShow.updated_at)
                         )
@@ -66765,7 +66804,7 @@ var render = function () {
                                   },
                                   [
                                     _vm._v(
-                                      "Data: " +
+                                      "Date: " +
                                         _vm._s(
                                           _vm._f("filtroDataHora")(
                                             msg.created_at
@@ -66776,7 +66815,7 @@ var render = function () {
                                 ),
                                 _vm._v(" "),
                                 _c("p", { staticClass: "card-text" }, [
-                                  _vm._v("Mensagem: " + _vm._s(msg.text)),
+                                  _vm._v("Text: " + _vm._s(msg.text)),
                                 ]),
                                 _vm._v(" "),
                                 _c(
@@ -66790,7 +66829,7 @@ var render = function () {
                                       },
                                     },
                                   },
-                                  [_vm._v("Deletar")]
+                                  [_vm._v("Delete")]
                                 ),
                               ]),
                             ]),

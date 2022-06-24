@@ -82,25 +82,25 @@ class DatabaseSeeder extends Seeder
         $status1 = Situation::create([
              'title' => 'Urgent',
              'color' => 'danger',
-             'icon' => 'fa-solid fa-circle-exclamation'
+             'icon' => 'fa-circle-exclamation'
         ]);
         
         $status2 = Situation::create([
             'title' => 'Attention',
             'color' => 'orange',
-            'icon' => 'fa-solid fa-bomb'
+            'icon' => 'fa-bomb'
        ]);
 
        $status3 = Situation::create([
             'title' => 'Late',
             'color' => 'danger',
-            'icon' => 'fa-solid fa-alarm-clock'
+            'icon' => 'fa-clock'
         ]);
 
         $status4 = Situation::create([
             'title' => 'Quiet',
             'color' => 'danger',
-            'icon' => 'fa-solid fa-mug-hot'
+            'icon' => 'fa-mug-hot'
         ]);
 
         $statuspost = SituationPost::create([

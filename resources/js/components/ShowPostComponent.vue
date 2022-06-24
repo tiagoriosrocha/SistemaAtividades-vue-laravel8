@@ -10,7 +10,10 @@
                 
                 <span v-for="situation in situations" :key="situation.id">
                     <input type="checkbox" :checked="temSituacao(situation)" class="btn-check" :id="'btn-check-' + situation.id" >
-                    <label class="btn btn-sm btn-outline-primary" :for="'btn-check-' + situation.id">{{ situation.title }}</label>
+                    <label class="btn btn-sm btn-outline-primary" @click="alterarSituation(situation)" :for="'btn-check-' + situation.id">
+                        <!-- <font-awesome-icon :icon="temSituacao(situation) ? 'fa-solid fa-minus' : 'fa-solid fa-plus' " />  -->
+                        {{ situation.title }}
+                    </label>
                 </span>
                 <hr>
                 <div class="mb-1">
@@ -53,10 +56,10 @@
                     </div>
                 </div>
                 <div class="mb-1">
-                    <label for="scheduledto" class="form-label">Criado em: {{ postShow.created_at | filtroDataHora}}</label>
+                    <label for="scheduledto" class="form-label">Created at: {{ postShow.created_at | filtroDataHora}}</label>
                 </div>
                 <div class="mb-1">
-                    <label for="scheduledto" class="form-label">Atualizado em: {{ postShow.updated_at | filtroDataHora}}</label>
+                    <label for="scheduledto" class="form-label">Updated at: {{ postShow.updated_at | filtroDataHora}}</label>
                 </div>
                 
                 <div v-if="qtdMsg > 0">
@@ -66,9 +69,9 @@
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <h5 class="card-title">Title: {{ msg.title }}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Data: {{ msg.created_at | filtroDataHora }}</h6>
-                                    <p class="card-text">Mensagem: {{ msg.text }}</p>
-                                    <a class="btn btn-outlined btn-sm btn-outline-danger" @click="deletarMensagem(index)">Deletar</a>
+                                    <h6 class="card-subtitle mb-2 text-muted">Date: {{ msg.created_at | filtroDataHora }}</h6>
+                                    <p class="card-text">Text: {{ msg.text }}</p>
+                                    <a class="btn btn-outlined btn-sm btn-outline-danger" @click="deletarMensagem(index)">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +121,15 @@ export default {
 
     methods: {
         addPost(post){
-            this.postShow = post
+            //this.postShow = post
+
+            axios.get('/post/' + post.id)
+            .then(response => {
+                this.postShow = response.data
+                console.log('ShowPostComponent: buscando post: ' + JSON.stringify(this.postShow))
+            })
+            .catch(error => (console.log("resposta erro: " + error)));
+
             this.qtdMsg = post.messages.length
             console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow))
 
@@ -216,6 +227,23 @@ export default {
             }
             console.log("Situation: " + situation.title + " = " + result)
             return result
+        },
+
+        alterarSituation(situation){
+            console.log("post: " + this.postShow.id)
+            console.log("situation: " + situation.id)
+            console.log("habilitar: " + !this.temSituacao(situation))
+
+            axios.post('/post/situation/edit', {
+                'post_id': this.postShow.id,
+                'situation_id': situation.id,
+                'habilitar': !this.temSituacao(situation)
+            })
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => (console.log("resposta erro: " + error)));
+
         }
     }
 }
