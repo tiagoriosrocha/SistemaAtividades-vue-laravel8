@@ -82,12 +82,12 @@
         
         methods: {
             descerPost(index){
-                this.$emit('movimentar-post', this.id, this.id+1, this.posts[index])
+                this.$emit('movimentar-post', this.id, this.id+10, this.posts[index])
                 this.posts.splice(index, 1)
             },
 
             subirPost(index){
-                this.$emit('movimentar-post', this.id, this.id-1, this.posts[index])
+                this.$emit('movimentar-post', this.id, this.id-10, this.posts[index])
                 this.posts.splice(index,1)
             },
 
