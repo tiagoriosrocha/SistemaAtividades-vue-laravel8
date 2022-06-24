@@ -21012,13 +21012,8 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost(post) {
       var _this = this;
 
+      this.situations = [];
       this.postShow = post;
-      axios.get('/post/' + post.id).then(function (response) {
-        _this.postShow = response.data;
-        console.log('ShowPostComponent (addPost): buscando post ok');
-      })["catch"](function (error) {
-        return console.log("ShowPostComponent (addPost): resposta erro: " + error);
-      });
       this.qtdMsg = post.messages.length;
       axios.get('/situations').then(function (response) {
         _this.situations = response.data;

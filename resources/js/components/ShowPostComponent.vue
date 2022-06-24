@@ -122,15 +122,8 @@ export default {
 
     methods: {
         addPost(post){
+            this.situations = []
             this.postShow = post
-
-            axios.get('/post/' + post.id)
-            .then(response => {
-                this.postShow = response.data
-                console.log('ShowPostComponent (addPost): buscando post ok')
-            })
-            .catch(error => (console.log("ShowPostComponent (addPost): resposta erro: " + error)));
-
             this.qtdMsg = post.messages.length
 
             axios.get('/situations')
