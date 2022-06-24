@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         $post1 = Post::create([
             'title' => 'Meu primeiro post',
-            'Description' => 'meu primeiro post desc',
+            'description' => 'meu primeiro post desc',
             'scheduledto' => '2022-12-31 23:59:00',
             'user_id' => $umUsuário->id,
             'frame_id' => $framePlanejado->id
@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
 
         $post2 = Post::create([
             'title' => 'Meu segundo post',
-            'Description' => 'meu segundo post desc',
+            'description' => 'meu segundo post desc',
             'scheduledto' => '2023-12-31 23:59:00',
             'user_id' => $umUsuário->id,
             'frame_id' => $framePlanejado->id
