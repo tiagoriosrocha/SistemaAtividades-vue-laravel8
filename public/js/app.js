@@ -65768,7 +65768,7 @@ var render = function () {
       _vm._v(" "),
       _c("div", { staticClass: "mb-2" }, [
         _c("label", { staticClass: "form-label", attrs: { for: "text" } }, [
-          _vm._v("Scheduled to:"),
+          _vm._v("Text:"),
         ]),
         _vm._v(" "),
         _c("textarea", {

@@ -6,7 +6,7 @@
                 <input type="text" class="form-control" id="title" v-model="title">
             </div>
             <div class="mb-2">
-                <label for="text" class="form-label">Scheduled to:</label>
+                <label for="text" class="form-label">Text:</label>
                 <textarea row="3" class="form-control" id="text" v-model="text"></textarea>
             </div>
             <div class="mb-2">
