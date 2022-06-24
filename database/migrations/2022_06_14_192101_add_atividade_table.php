@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('title');            //título da atividade
             $table->string('description');      //descrição da atividade
             $table->dateTime('scheduledto');    //agendado para
-            $table->string('status')->nullable();
             $table->timestamps();               //registro created_at e updated_at
         });
     }

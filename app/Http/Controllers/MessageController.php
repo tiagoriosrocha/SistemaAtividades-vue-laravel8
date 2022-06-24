@@ -103,8 +103,6 @@ class MessageController extends Controller
         if( isset($request) ){
             $id = $request->input('id');
 
-            Log::info("Mensagem código: " . $id);
-
             $message = Message::find($id);
             $message->delete($id);
 

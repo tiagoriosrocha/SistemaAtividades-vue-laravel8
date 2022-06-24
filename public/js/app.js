@@ -20427,6 +20427,9 @@ __webpack_require__.r(__webpack_exports__);
       text: ""
     };
   },
+  mounted: function mounted() {
+    console.log('CreateMessageComponent: CreateMessageComponent montado');
+  },
   methods: {
     salvarMensagem: function salvarMensagem() {
       var _this = this;
@@ -20441,8 +20444,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.text = "";
 
         _this.$emit('created-message', message);
+
+        console.log("CreateMessageComponent (salvarMensagem): axios - salvar mensagem ok");
       })["catch"](function (error) {
-        return console.log("CreateMessageComponent: resposta erro: " + error);
+        return console.log("CreateMessageComponent (salvarMensagem): axios - resposta erro: " + error);
       });
     }
   }
@@ -20505,11 +20510,13 @@ __webpack_require__.r(__webpack_exports__);
       scheduledto: "2022-07-30 13:00:00"
     };
   },
+  mounted: function mounted() {
+    console.log('CreatePostComponent: CreatePostComponent montado');
+  },
   methods: {
     criarPost: function criarPost() {
       var _this = this;
 
-      console.log("CreatePostComponent: criando nova atividade");
       axios.post('/post', {
         'title': this.title,
         'description': this.description,
@@ -20519,8 +20526,10 @@ __webpack_require__.r(__webpack_exports__);
         var post = response.data;
 
         _this.$emit('novo-post', post);
+
+        console.log("CreatePostComponent (criarPost): axios - salvar post ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("CreatePostComponent (criarPost): axios - resposta erro: " + error);
       });
     }
   }
@@ -20581,6 +20590,9 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     'frames': []
   },
+  mounted: function mounted() {
+    console.log("DashboardComponent: Dashboard montado");
+  },
   data: function data() {
     return {
       title: "Título",
@@ -20598,21 +20610,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     movimentar: function movimentar(origem, destino, post) {
-      console.log("dashboard: movimentar => origem: " + origem);
-      console.log("dashboard: movimentar => destino: " + destino);
-      console.log("dashboard: movimentar => objeto: " + JSON.stringify(post));
       this.$root.$emit('receberPost', post, destino);
       axios.post('/post/movimentar', {
         'id': post.id,
         'frame_id': destino
       }).then(function (response) {
-        return console.log("Post movimentado ok");
+        return console.log("dashboardComponent (movimentar): axios - Post movimentado ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("dashboardComponent (movimentar): axios - resposta erro: " + error);
       });
     },
     novaAtividade: function novaAtividade() {
-      console.log("show modal"); //enviar o frame ID
+      console.log("DashboardComponent (novaAtividade): show modal-form"); //enviar o frame ID
     },
     salvarPost: function salvarPost(post) {
       this.movimentar(0, this.frames[0].id, post);
@@ -20621,9 +20630,9 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/post/delete', {
         'id': post.id
       }).then(function (response) {
-        return console.log('post deletado');
+        return console.log('dashboardComponent (deletarPost): axios - deletar post ok');
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("dashboardComponent (deletarPost): axios - resposta erro: " + error);
       });
     },
     exibirPost: function exibirPost(post) {
@@ -20633,8 +20642,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.postShow = response.data;
 
         _this.$root.$emit('exibir-post', _this.postShow);
+
+        console.log("dashboardComponent (exibirPost): axios - buscar post ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("dashboardComponent (exibirPost): axios - resposta erro: " + error);
       });
     }
   }
@@ -20703,9 +20714,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
     this.$root.$on('receberPost', this.addPost);
     this.$root.$on('updated-post', this.updatePost);
+    console.log('FrameComponent: Frame ' + this.title + ' montado');
   },
   created: function created() {
     this.listaPosts = this.posts;
@@ -20755,8 +20766,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (a.id < b.id) {
           return -1;
-        } // a must be equal to b
-
+        }
 
         return 0;
       });
@@ -20827,25 +20837,28 @@ __webpack_require__.r(__webpack_exports__);
     'subir': Boolean,
     'color': String
   },
+  mounted: function mounted() {
+    console.log('PostComponent: PostComponent ' + this.post.id + ' montado');
+  },
   methods: {
     subirPost: function subirPost(index) {
-      console.log("PostComponent: Subir");
+      //console.log("PostComponent (subirPost): Subir")
       this.$emit('subir-post', index);
     },
     descerPost: function descerPost(index) {
-      console.log("PostComponent: Descer");
+      //console.log("PostComponent (descerPost): Descer")
       this.$emit('descer-post', index);
     },
     deletarPost: function deletarPost(index) {
-      console.log("PostComponent: Deletar");
+      //console.log("PostComponent (deletarPost): Deletar")
       this.$emit('deletar-post', index, this.post);
     },
     exibirPost: function exibirPost(index) {
-      console.log("PostComponent: Exibir");
+      //console.log("PostComponent (exibirPost): Exibir")
       this.$emit('exibir-post', index, this.post);
     },
     editarPost: function editarPost(index) {
-      console.log("PostComponent: Editar");
+      //console.log("PostComponent (editarPost): Editar")
       this.$emit('editar-post', index, this.post);
     }
   },
@@ -20988,6 +21001,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$root.$on('exibir-post', this.addPost);
+    console.log('ShowPostComponent: showPostComponent ' + this.postShow.id + ' montado');
   },
   filters: {
     filtroDataHora: function filtroDataHora(date) {
@@ -20998,20 +21012,19 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost(post) {
       var _this = this;
 
-      //this.postShow = post
+      this.postShow = post;
       axios.get('/post/' + post.id).then(function (response) {
         _this.postShow = response.data;
-        console.log('ShowPostComponent: buscando post: ' + JSON.stringify(_this.postShow));
+        console.log('ShowPostComponent (addPost): buscando post ok');
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("ShowPostComponent (addPost): resposta erro: " + error);
       });
       this.qtdMsg = post.messages.length;
-      console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow));
       axios.get('/situations').then(function (response) {
         _this.situations = response.data;
-        console.log('Situations: ' + JSON.stringify(_this.situations));
+        console.log('ShowPostComponent (addPost): busca situations ok');
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("ShowPostComponent (addPost): resposta erro: " + error);
       });
     },
     criarFormTitle: function criarFormTitle() {
@@ -21059,8 +21072,10 @@ __webpack_require__.r(__webpack_exports__);
         var post = response.data;
 
         _this2.$root.$emit('updated-post', post);
+
+        console.log("ShowPostComponent (persistirUpdate): alterar campo post ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("ShowPostComponent (persistirUpdate): resposta erro: " + error);
       });
     },
     criarMensagem: function criarMensagem() {
@@ -21069,7 +21084,6 @@ __webpack_require__.r(__webpack_exports__);
     mensagemCriada: function mensagemCriada(message) {
       this.exibirFormMensagem = false;
       this.qtdMsg++;
-      console.log("Mensagem adicionada: " + JSON.stringify(message));
       this.postShow.messages.push(message);
     },
     deletarMensagem: function deletarMensagem(index) {
@@ -21082,8 +21096,9 @@ __webpack_require__.r(__webpack_exports__);
         _this3.postShow.messages.splice(index, 1);
 
         _this3.qtdMsg--;
+        console.log("ShowPostComponent (deletarMensagem): deletar mensagem ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("ShowPostComponent (deletarMensagem): resposta erro: " + error);
       });
     },
     temSituacao: function temSituacao(situation) {
@@ -21094,21 +21109,23 @@ __webpack_require__.r(__webpack_exports__);
         if (umaSituacao.id == situation.id) result = true;
       }
 
-      console.log("Situation: " + situation.title + " = " + result);
       return result;
     },
     alterarSituation: function alterarSituation(situation) {
-      console.log("post: " + this.postShow.id);
-      console.log("situation: " + situation.id);
-      console.log("habilitar: " + !this.temSituacao(situation));
+      var _this4 = this;
+
       axios.post('/post/situation/edit', {
         'post_id': this.postShow.id,
         'situation_id': situation.id,
         'habilitar': !this.temSituacao(situation)
       }).then(function (response) {
-        console.log(response);
+        var post = response.data;
+
+        _this4.$root.$emit('updated-post', post);
+
+        console.log("ShowPostComponent (alterarSituation): alterar situation ok");
       })["catch"](function (error) {
-        return console.log("resposta erro: " + error);
+        return console.log("ShowPostComponent (alterarSituation): resposta erro: " + error);
       });
     }
   }

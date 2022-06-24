@@ -33,8 +33,6 @@ class HomeController extends Controller
             $q->where('user_id', '=' , $userId);
         }])->get();
 
-        Log::info($frames . "\nUserID: " . $userId);
-
         return view('home', ['user' => $user, 'frames' => $frames]);
     }
 }

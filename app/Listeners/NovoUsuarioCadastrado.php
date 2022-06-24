@@ -58,7 +58,6 @@ class NovoUsuarioCadastrado
             'title' => 'My first post',
             'description' => 'My first post description',
             'scheduledto' => '2022-12-31 23:59:00',
-            'status' => '#urgente',
             'user_id' => $user->id,
             'frame_id' => $framePlanejado->id
         ]);
@@ -67,7 +66,6 @@ class NovoUsuarioCadastrado
             'title' => 'My second post',
             'description' => 'My second post description',
             'scheduledto' => '2023-12-31 23:59:00',
-            'status' => '#tranquilo',
             'user_id' => $user->id,
             'frame_id' => $framePlanejado->id
         ]);

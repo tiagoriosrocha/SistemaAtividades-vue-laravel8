@@ -51,7 +51,6 @@ class DatabaseSeeder extends Seeder
             'title' => 'Meu primeiro post',
             'Description' => 'meu primeiro post desc',
             'scheduledto' => '2022-12-31 23:59:00',
-            'status' => '#urgente',
             'user_id' => $umUsuário->id,
             'frame_id' => $framePlanejado->id
         ]);
@@ -60,7 +59,6 @@ class DatabaseSeeder extends Seeder
             'title' => 'Meu segundo post',
             'Description' => 'meu segundo post desc',
             'scheduledto' => '2023-12-31 23:59:00',
-            'status' => '#tranquilo',
             'user_id' => $umUsuário->id,
             'frame_id' => $framePlanejado->id
         ]);

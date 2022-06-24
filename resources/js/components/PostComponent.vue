@@ -37,26 +37,30 @@
             'subir' : Boolean,
             'color' : String,
         },
+
+        mounted(){
+            console.log('PostComponent: PostComponent ' + this.post.id + ' montado')
+        },
         
         methods: {
             subirPost(index){
-                console.log("PostComponent: Subir")
+                //console.log("PostComponent (subirPost): Subir")
                 this.$emit('subir-post',index)
             },
             descerPost(index){
-                console.log("PostComponent: Descer")
+                //console.log("PostComponent (descerPost): Descer")
                 this.$emit('descer-post',index)
             },
             deletarPost(index){
-                console.log("PostComponent: Deletar")
+                //console.log("PostComponent (deletarPost): Deletar")
                 this.$emit('deletar-post',index, this.post)
             },
             exibirPost(index){
-                console.log("PostComponent: Exibir")
+                //console.log("PostComponent (exibirPost): Exibir")
                 this.$emit('exibir-post',index, this.post)
             },
             editarPost(index){
-                console.log("PostComponent: Editar")
+                //console.log("PostComponent (editarPost): Editar")
                 this.$emit('editar-post',index, this.post)
             }
         },

@@ -54,8 +54,6 @@ class PostController extends Controller
                 'frame_id' => $frame_id,
             ]);
 
-            Log::info('Post salvo: ' . $post->id);
-            
             return response()->json($post, 200);
         }else{
             return response()->json(['resposta' => 'error'], 401);
@@ -73,8 +71,6 @@ class PostController extends Controller
         $post = Post::where('id', $postId)->with(['messages' => function($q) use ($postId) {
             $q->where('post_id', '=' , $postId);
         }, 'situations'])->get()->first();
-
-        Log::info("post: " . $post);
 
         return response()->json($post,200);
     }
@@ -120,8 +116,6 @@ class PostController extends Controller
     {
         if( isset($request) ){
             $id = $request->input('id');
-            Log::info("deletando registro: " . $id);
-
             $post = Post::find($id);
             $post->delete($id);
 
@@ -137,8 +131,6 @@ class PostController extends Controller
         if( isset($request) ){
             $id = $request->input('id');
             $frameId = $request->input('frame_id');
-
-            Log::info("movimentando registro: " . $id);
 
             $post = Post::find($id);
             $post->frame_id = $frameId;
@@ -165,7 +157,7 @@ class PostController extends Controller
             }
             
 
-            return response()->json(['resposta' => 'ok'], 200);
+            return response()->json($post, 200);
         }else{
             return response()->json(['resposta' => 'error'], 401);
         }

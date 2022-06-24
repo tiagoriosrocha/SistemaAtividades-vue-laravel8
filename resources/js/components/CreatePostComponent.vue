@@ -46,10 +46,12 @@ export default {
         }
     },
 
+    mounted(){
+        console.log('CreatePostComponent: CreatePostComponent montado')
+    },
+
     methods: {
         criarPost(){
-            console.log("CreatePostComponent: criando nova atividade")
-            
             axios.post('/post', {
                 'title': this.title,
                 'description': this.description,
@@ -59,8 +61,9 @@ export default {
             .then(response => {
                 var post = response.data
                 this.$emit('novo-post', post)
+                console.log("CreatePostComponent (criarPost): axios - salvar post ok")
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("CreatePostComponent (criarPost): axios - resposta erro: " + error)));
             
         },
     }

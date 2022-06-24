@@ -17,7 +17,6 @@ class SituationController extends Controller
     public function index()
     {
         $situations = Situation::all();
-        Log::info("Situation get all: " . $situations);
         return response()->json($situations,200);
     }
 

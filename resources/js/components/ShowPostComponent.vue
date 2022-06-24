@@ -111,6 +111,7 @@ export default {
 
     mounted() {
         this.$root.$on('exibir-post', this.addPost)
+        console.log('ShowPostComponent: showPostComponent ' + this.postShow.id + ' montado')
     },
 
     filters: {
@@ -121,24 +122,23 @@ export default {
 
     methods: {
         addPost(post){
-            //this.postShow = post
+            this.postShow = post
 
             axios.get('/post/' + post.id)
             .then(response => {
                 this.postShow = response.data
-                console.log('ShowPostComponent: buscando post: ' + JSON.stringify(this.postShow))
+                console.log('ShowPostComponent (addPost): buscando post ok')
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("ShowPostComponent (addPost): resposta erro: " + error)));
 
             this.qtdMsg = post.messages.length
-            console.log("imprimindo detalhes do post: " + JSON.stringify(this.postShow))
 
             axios.get('/situations')
             .then(response => {
                 this.situations = response.data
-                console.log('Situations: ' + JSON.stringify(this.situations))
+                console.log('ShowPostComponent (addPost): busca situations ok')
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("ShowPostComponent (addPost): resposta erro: " + error)));
         },
 
         criarFormTitle(){
@@ -191,8 +191,9 @@ export default {
                 console.log(response)
                 var post = response.data
                 this.$root.$emit('updated-post', post)
+                console.log("ShowPostComponent (persistirUpdate): alterar campo post ok")
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("ShowPostComponent (persistirUpdate): resposta erro: " + error)));
         },
 
         criarMensagem(){
@@ -202,7 +203,6 @@ export default {
         mensagemCriada(message){
             this.exibirFormMensagem = false
             this.qtdMsg++
-            console.log("Mensagem adicionada: " + JSON.stringify(message))
             this.postShow.messages.push(message)
         },
 
@@ -214,8 +214,9 @@ export default {
             .then(response => {
                 this.postShow.messages.splice(index,1)
                 this.qtdMsg--
+                console.log("ShowPostComponent (deletarMensagem): deletar mensagem ok")
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("ShowPostComponent (deletarMensagem): resposta erro: " + error)));
         },
 
         temSituacao(situation){
@@ -225,24 +226,21 @@ export default {
                 if(umaSituacao.id == situation.id)
                     result = true
             }
-            console.log("Situation: " + situation.title + " = " + result)
             return result
         },
 
         alterarSituation(situation){
-            console.log("post: " + this.postShow.id)
-            console.log("situation: " + situation.id)
-            console.log("habilitar: " + !this.temSituacao(situation))
-
             axios.post('/post/situation/edit', {
                 'post_id': this.postShow.id,
                 'situation_id': situation.id,
                 'habilitar': !this.temSituacao(situation)
             })
             .then(response => {
-                console.log(response)
+                var post = response.data
+                this.$root.$emit('updated-post', post)
+                console.log("ShowPostComponent (alterarSituation): alterar situation ok")
             })
-            .catch(error => (console.log("resposta erro: " + error)));
+            .catch(error => (console.log("ShowPostComponent (alterarSituation): resposta erro: " + error)));
 
         }
     }

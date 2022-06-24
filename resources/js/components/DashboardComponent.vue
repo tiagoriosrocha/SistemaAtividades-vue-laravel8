@@ -40,6 +40,10 @@ export default {
         'frames' : [],
     },
 
+    mounted(){
+        console.log("DashboardComponent: Dashboard montado")
+    },
+
     data() {
         return {
             title: "Título",
@@ -59,21 +63,18 @@ export default {
     
     methods: {
         movimentar(origem, destino, post){
-            console.log("dashboard: movimentar => origem: " + origem)
-            console.log("dashboard: movimentar => destino: " + destino)
-            console.log("dashboard: movimentar => objeto: " + JSON.stringify(post))
             this.$root.$emit('receberPost',post, destino)
 
             axios.post('/post/movimentar', {
                 'id': post.id,
                 'frame_id': destino,
             })
-            .then(response => (console.log("Post movimentado ok")))
-            .catch(error => (console.log("resposta erro: " + error)));
+            .then(response => (console.log("dashboardComponent (movimentar): axios - Post movimentado ok")))
+            .catch(error => (console.log("dashboardComponent (movimentar): axios - resposta erro: " + error)));
         },
 
         novaAtividade(){
-            console.log("show modal")
+            console.log("DashboardComponent (novaAtividade): show modal-form")
             //enviar o frame ID
         },
 
@@ -85,8 +86,8 @@ export default {
             axios.post('/post/delete',{
                 'id': post.id
             })
-            .then(response => (console.log('post deletado')))
-            .catch(error => (console.log("resposta erro: " + error)));
+            .then(response => (console.log('dashboardComponent (deletarPost): axios - deletar post ok')))
+            .catch(error => (console.log("dashboardComponent (deletarPost): axios - resposta erro: " + error)));
         },
 
         exibirPost(post){
@@ -94,8 +95,9 @@ export default {
             .then(response => {
                 this.postShow = response.data
                 this.$root.$emit('exibir-post',this.postShow)
-                })
-            .catch(error => (console.log("resposta erro: " + error)));
+                console.log("dashboardComponent (exibirPost): axios - buscar post ok")
+            })
+            .catch(error => (console.log("dashboardComponent (exibirPost): axios - resposta erro: " + error)));
         },
 
     }

@@ -51,9 +51,10 @@
         },
         
         mounted() {
-            console.log('Component mounted.')
             this.$root.$on('receberPost', this.addPost)
             this.$root.$on('updated-post', this.updatePost)
+            
+            console.log('FrameComponent: Frame ' + this.title +' montado')
         },
         
         created(){
@@ -114,7 +115,7 @@
                 if (a.id < b.id) {
                     return -1;
                 }
-                // a must be equal to b
+                
                 return 0;
                 });
             },

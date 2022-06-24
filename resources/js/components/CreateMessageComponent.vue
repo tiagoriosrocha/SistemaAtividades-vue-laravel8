@@ -30,6 +30,10 @@ export default {
         }
     },
 
+    mounted(){
+        console.log('CreateMessageComponent: CreateMessageComponent montado')
+    },
+
     methods: {
         salvarMensagem(){
             axios.post('/message', {
@@ -42,8 +46,9 @@ export default {
                 this.title = ""
                 this.text = ""
                 this.$emit('created-message', message)
+                console.log("CreateMessageComponent (salvarMensagem): axios - salvar mensagem ok")
             })
-            .catch(error => (console.log("CreateMessageComponent: resposta erro: " + error)));
+            .catch(error => (console.log("CreateMessageComponent (salvarMensagem): axios - resposta erro: " + error)));
         }
     }
 }
