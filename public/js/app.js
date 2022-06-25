@@ -20864,8 +20864,16 @@ __webpack_require__.r(__webpack_exports__);
     'subir': Boolean,
     'color': String
   },
+  data: function data() {
+    return {
+      time: "00:00:00",
+      isRunning: false
+    };
+  },
   mounted: function mounted() {
     console.log('PostComponent: PostComponent ' + this.post.id + ' montado');
+    this.time = this.post.time;
+    this.isRunning = this.post.isrunning;
   },
   methods: {
     subirPost: function subirPost(index) {
@@ -66445,7 +66453,7 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-6 text-end" }, [
-          _vm.isrunning
+          _vm.isRunning
             ? _c("div", [
                 _c(
                   "a",
@@ -66461,9 +66469,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.post.time) +
-                    "\n            "
+                  "\n                " + _vm._s(_vm.time) + "\n            "
                 ),
               ])
             : _c("div", [
@@ -66481,9 +66487,7 @@ var render = function () {
                   1
                 ),
                 _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.post.time) +
-                    "\n            "
+                  "\n                " + _vm._s(_vm.time) + "\n            "
                 ),
               ]),
         ]),

@@ -35,17 +35,17 @@
                 </span>
             </div>
             <div class="col-6 text-end">
-                <div v-if="isrunning">
+                <div v-if="isRunning">
                     <a href="#" class="btn btn-sm btn-outline-danger rounded-pill">
                         <font-awesome-icon icon="fa-solid fa-pause" />
                     </a>
-                    {{ post.time }}
+                    {{ time }}
                 </div>
                 <div v-else>
                     <a href="#" class="btn btn-sm btn-outline-success rounded-pill">
                         <font-awesome-icon icon="fa-solid fa-play" />
                     </a>
-                    {{ post.time }}
+                    {{ time }}
                 </div>
             </div>
             </div>
@@ -63,8 +63,17 @@
             'color' : String,
         },
 
+        data() {
+            return {
+                time : "00:00:00",
+                isRunning : false,
+            }
+        },
+
         mounted(){
             console.log('PostComponent: PostComponent ' + this.post.id + ' montado')
+            this.time = this.post.time
+            this.isRunning = this.post.isrunning
         },
         
         methods: {

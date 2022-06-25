@@ -108,7 +108,7 @@ export default {
             descriptionText : "",
             scheduledtoText : "",
             exibirFormMensagem : false,
-            situations : []
+            situations : [],
         }
     },
 
