@@ -36,13 +36,13 @@
             </div>
             <div class="col-6 text-end">
                 <div v-if="isRunning">
-                    <a href="#" class="btn btn-sm btn-outline-danger rounded-pill">
+                    <a @click="pararContador" class="btn btn-sm btn-outline-danger rounded-pill">
                         <font-awesome-icon icon="fa-solid fa-pause" />
                     </a>
                     {{ time }}
                 </div>
                 <div v-else>
-                    <a href="#" class="btn btn-sm btn-outline-success rounded-pill">
+                    <a  @click="iniciarContador" class="btn btn-sm btn-outline-success rounded-pill">
                         <font-awesome-icon icon="fa-solid fa-play" />
                     </a>
                     {{ time }}
@@ -54,6 +54,9 @@
 </template>
 
 <script>
+
+    import moment from 'moment';
+    
     export default {
         props: {
             'post' : [],
@@ -74,6 +77,7 @@
             console.log('PostComponent: PostComponent ' + this.post.id + ' montado')
             this.time = this.post.time
             this.isRunning = this.post.isrunning
+            if(this.isRunning == true) this.contarTempo()
         },
         
         methods: {
@@ -96,6 +100,41 @@
             editarPost(index){
                 //console.log("PostComponent (editarPost): Editar")
                 this.$emit('editar-post',index, this.post)
+            },
+
+            iniciarContador(){
+                this.isRunning = true
+                this.contarTempo()
+            },
+
+            pararContador(){
+                this.isRunning = false
+                this.salvarTime()
+            },
+
+            salvarTime(){
+                axios.post('/post/time/edit', {
+                    'post_id': this.post.id,
+                    'time': this.time,
+                    'isrunning' : this.isRunning
+                })
+                .then(response => {
+                    console.log("PostComponent (salvarTime): alterar campo time ok")
+                })
+                .catch(error => (console.log("ShowPostComponent (persistirUpdate): resposta erro: " + error)));
+            },
+
+            contarTempo(){
+                if( this.isRunning == true ){
+                    setTimeout(() => {
+                        var tempo = moment(this.time, 'HH:mm:ss')
+                        tempo.add(moment.duration(1,'seconds'))
+                        this.time = tempo.format('HH:mm:ss')
+                        this.salvarTime()
+                        this.contarTempo()
+                    }, 1000)
+                }
+                
             }
         },
         

@@ -20801,6 +20801,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -20856,6 +20858,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'post': [],
@@ -20874,6 +20877,7 @@ __webpack_require__.r(__webpack_exports__);
     console.log('PostComponent: PostComponent ' + this.post.id + ' montado');
     this.time = this.post.time;
     this.isRunning = this.post.isrunning;
+    if (this.isRunning == true) this.contarTempo();
   },
   methods: {
     subirPost: function subirPost(index) {
@@ -20895,6 +20899,40 @@ __webpack_require__.r(__webpack_exports__);
     editarPost: function editarPost(index) {
       //console.log("PostComponent (editarPost): Editar")
       this.$emit('editar-post', index, this.post);
+    },
+    iniciarContador: function iniciarContador() {
+      this.isRunning = true;
+      this.contarTempo();
+    },
+    pararContador: function pararContador() {
+      this.isRunning = false;
+      this.salvarTime();
+    },
+    salvarTime: function salvarTime() {
+      axios.post('/post/time/edit', {
+        'post_id': this.post.id,
+        'time': this.time,
+        'isrunning': this.isRunning
+      }).then(function (response) {
+        console.log("PostComponent (salvarTime): alterar campo time ok");
+      })["catch"](function (error) {
+        return console.log("ShowPostComponent (persistirUpdate): resposta erro: " + error);
+      });
+    },
+    contarTempo: function contarTempo() {
+      var _this = this;
+
+      if (this.isRunning == true) {
+        setTimeout(function () {
+          var tempo = moment__WEBPACK_IMPORTED_MODULE_0___default()(_this.time, 'HH:mm:ss');
+          tempo.add(moment__WEBPACK_IMPORTED_MODULE_0___default().duration(1, 'seconds'));
+          _this.time = tempo.format('HH:mm:ss');
+
+          _this.salvarTime();
+
+          _this.contarTempo();
+        }, 1000);
+      }
     }
   },
   computed: {
@@ -66459,7 +66497,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: "btn btn-sm btn-outline-danger rounded-pill",
-                    attrs: { href: "#" },
+                    on: { click: _vm.pararContador },
                   },
                   [
                     _c("font-awesome-icon", {
@@ -66477,7 +66515,7 @@ var render = function () {
                   "a",
                   {
                     staticClass: "btn btn-sm btn-outline-success rounded-pill",
-                    attrs: { href: "#" },
+                    on: { click: _vm.iniciarContador },
                   },
                   [
                     _c("font-awesome-icon", {

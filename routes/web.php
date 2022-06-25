@@ -27,6 +27,7 @@ Route::post('/post/delete', [App\Http\Controllers\PostController::class, 'destro
 Route::post('/post/movimentar', [App\Http\Controllers\PostController::class, 'movimentar']);
 Route::post('/post/editar',[App\Http\Controllers\PostController::class, 'update']);
 Route::post('/post/situation/edit',[App\Http\Controllers\PostController::class, 'setSituation']);
+Route::post('/post/time/edit',[App\Http\Controllers\PostController::class, 'setTime']);
 
 Route::post('/message',[App\Http\Controllers\MessageController::class, 'store']);
 Route::post('/message/delete',[App\Http\Controllers\MessageController::class, 'destroy']);

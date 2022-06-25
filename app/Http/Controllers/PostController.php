@@ -163,4 +163,21 @@ class PostController extends Controller
             return response()->json(['resposta' => 'error'], 401);
         }
     }
+
+    public function setTime(Request $request){
+        if( isset($request) ){
+            $post_id = $request->input('post_id');
+            $time = $request->input('time');
+            $isRunning = $request->input('isrunning');
+
+            $post = Post::find($post_id);
+            $post->time = $time; 
+            $post->isrunning = $isRunning; 
+            $post->save();          
+
+            return response()->json($post, 200);
+        }else{
+            return response()->json(['resposta' => 'error'], 401);
+        }
+    }
 }
