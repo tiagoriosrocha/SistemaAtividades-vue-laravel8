@@ -20831,6 +20831,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     'post': [],
@@ -20895,6 +20920,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
 //
 //
 //
@@ -21172,6 +21200,8 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fort
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faBomb);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faMugHot);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faClock);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPlay);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__.library.add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__.faPause);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -66174,7 +66204,7 @@ var render = function () {
                   "div",
                   {
                     key: post.id,
-                    staticClass: "col-md-3",
+                    staticClass: "col-md-4 col-sm-12",
                     attrs: { post: post },
                   },
                   [
@@ -66233,15 +66263,24 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card", class: _vm.borda }, [
     _c("div", { staticClass: "card-header text-white", class: _vm.fundo }, [
-      _vm._v(
-        "\n            " +
-          _vm._s(_vm.index + 1) +
-          " - " +
-          _vm._s(_vm.post.title.substring(0, 25)) +
-          "  "
-      ),
-      _c("span", { staticClass: "badge bg-light text-black rounded-pill" }, [
-        _vm._v("#" + _vm._s(_vm.post.id)),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-8 text-start" }, [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.index + 1) +
+              " - " +
+              _vm._s(_vm.post.title.substring(0, 25)) +
+              "\n        "
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 text-end" }, [
+          _c(
+            "span",
+            { staticClass: "badge bg-light text-black rounded-pill" },
+            [_vm._v("#" + _vm._s(_vm.post.id))]
+          ),
+        ]),
       ]),
     ]),
     _vm._v(" "),
@@ -66250,153 +66289,205 @@ var render = function () {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-footer" }, [
-      _c(
-        "span",
-        {
-          staticClass: "d-inline-block",
-          attrs: {
-            tabindex: "0",
-            "data-bs-toggle": "tooltip",
-            "data-bs-placement": "top",
-            title: "View Post",
-          },
-        },
-        [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }, [
           _c(
-            "a",
+            "span",
             {
-              staticClass: "btn btn-sm",
-              class: _vm.botao,
+              staticClass: "d-inline-block",
               attrs: {
-                "data-bs-toggle": "modal",
-                "data-bs-target": "#exibirAtividade",
-              },
-              on: {
-                click: function ($event) {
-                  return _vm.exibirPost(_vm.index)
-                },
+                tabindex: "0",
+                "data-bs-toggle": "tooltip",
+                "data-bs-placement": "top",
+                title: "View Post",
               },
             },
             [
-              _c("font-awesome-icon", {
-                attrs: { icon: "fa-solid fa-magnifying-glass" },
-              }),
-            ],
-            1
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "d-inline-block",
-          attrs: {
-            tabindex: "0",
-            "data-bs-toggle": "tooltip",
-            "data-bs-placement": "top",
-            title: "Delete Post",
-          },
-        },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-sm",
-              class: _vm.botao,
-              on: {
-                click: function ($event) {
-                  return _vm.deletarPost(_vm.index)
-                },
-              },
-            },
-            [_c("font-awesome-icon", { attrs: { icon: "fa-solid fa-trash" } })],
-            1
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "d-inline-block",
-          attrs: {
-            tabindex: "0",
-            "data-bs-toggle": "tooltip",
-            "data-bs-placement": "top",
-            title: "Down Post",
-          },
-        },
-        [
-          _c(
-            "a",
-            {
-              directives: [
+              _c(
+                "a",
                 {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.descer,
-                  expression: "descer",
+                  staticClass: "btn btn-sm",
+                  class: _vm.botao,
+                  attrs: {
+                    "data-bs-toggle": "modal",
+                    "data-bs-target": "#exibirAtividade",
+                  },
+                  on: {
+                    click: function ($event) {
+                      return _vm.exibirPost(_vm.index)
+                    },
+                  },
                 },
-              ],
-              staticClass: "btn btn-sm",
-              class: _vm.botao,
-              on: {
-                click: function ($event) {
-                  return _vm.descerPost(_vm.index)
-                },
-              },
-            },
-            [
-              _c("font-awesome-icon", {
-                attrs: { icon: "fa-solid fa-arrow-down" },
-              }),
-            ],
-            1
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: "fa-solid fa-magnifying-glass" },
+                  }),
+                ],
+                1
+              ),
+            ]
           ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass: "d-inline-block",
-          attrs: {
-            tabindex: "0",
-            "data-bs-toggle": "tooltip",
-            "data-bs-placement": "top",
-            title: "Up Post",
-          },
-        },
-        [
+          _vm._v(" "),
           _c(
-            "a",
+            "span",
             {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.subir,
-                  expression: "subir",
-                },
-              ],
-              staticClass: "btn btn-sm",
-              class: _vm.botao,
-              on: {
-                click: function ($event) {
-                  return _vm.subirPost(_vm.index)
-                },
+              staticClass: "d-inline-block",
+              attrs: {
+                tabindex: "0",
+                "data-bs-toggle": "tooltip",
+                "data-bs-placement": "top",
+                title: "Delete Post",
               },
             },
             [
-              _c("font-awesome-icon", {
-                attrs: { icon: "fa-solid fa-arrow-up" },
-              }),
-            ],
-            1
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-sm",
+                  class: _vm.botao,
+                  on: {
+                    click: function ($event) {
+                      return _vm.deletarPost(_vm.index)
+                    },
+                  },
+                },
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: "fa-solid fa-trash" },
+                  }),
+                ],
+                1
+              ),
+            ]
           ),
-        ]
-      ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "d-inline-block",
+              attrs: {
+                tabindex: "0",
+                "data-bs-toggle": "tooltip",
+                "data-bs-placement": "top",
+                title: "Down Post",
+              },
+            },
+            [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.descer,
+                      expression: "descer",
+                    },
+                  ],
+                  staticClass: "btn btn-sm",
+                  class: _vm.botao,
+                  on: {
+                    click: function ($event) {
+                      return _vm.descerPost(_vm.index)
+                    },
+                  },
+                },
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: "fa-solid fa-arrow-down" },
+                  }),
+                ],
+                1
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "d-inline-block",
+              attrs: {
+                tabindex: "0",
+                "data-bs-toggle": "tooltip",
+                "data-bs-placement": "top",
+                title: "Up Post",
+              },
+            },
+            [
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.subir,
+                      expression: "subir",
+                    },
+                  ],
+                  staticClass: "btn btn-sm",
+                  class: _vm.botao,
+                  on: {
+                    click: function ($event) {
+                      return _vm.subirPost(_vm.index)
+                    },
+                  },
+                },
+                [
+                  _c("font-awesome-icon", {
+                    attrs: { icon: "fa-solid fa-arrow-up" },
+                  }),
+                ],
+                1
+              ),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6 text-end" }, [
+          _vm.isrunning
+            ? _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-outline-danger rounded-pill",
+                    attrs: { href: "#" },
+                  },
+                  [
+                    _c("font-awesome-icon", {
+                      attrs: { icon: "fa-solid fa-pause" },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.post.time) +
+                    "\n            "
+                ),
+              ])
+            : _c("div", [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-sm btn-outline-success rounded-pill",
+                    attrs: { href: "#" },
+                  },
+                  [
+                    _c("font-awesome-icon", {
+                      attrs: { icon: "fa-solid fa-play" },
+                    }),
+                  ],
+                  1
+                ),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.post.time) +
+                    "\n            "
+                ),
+              ]),
+        ]),
+      ]),
     ]),
   ])
 }
@@ -66755,6 +66846,12 @@ var render = function () {
                         1
                       ),
                     ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mb-1" }, [
+                _c("label", { staticClass: "form-label" }, [
+                  _vm._v("Runtime: " + _vm._s(_vm.postShow.time)),
+                ]),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "mb-1" }, [

@@ -52,6 +52,7 @@ class PostController extends Controller
                 'scheduledto' => $scheduledto,
                 'user_id' => $userId,
                 'frame_id' => $frame_id,
+                'time' => '00:00:00'
             ]);
 
             return response()->json($post, 200);

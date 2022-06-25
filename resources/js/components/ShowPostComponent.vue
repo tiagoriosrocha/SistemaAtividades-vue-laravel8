@@ -56,6 +56,9 @@
                     </div>
                 </div>
                 <div class="mb-1">
+                    <label class="form-label">Runtime: {{ postShow.time }}</label>
+                </div>
+                <div class="mb-1">
                     <label for="scheduledto" class="form-label">Created at: {{ postShow.created_at | filtroDataHora}}</label>
                 </div>
                 <div class="mb-1">

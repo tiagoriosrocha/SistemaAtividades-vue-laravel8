@@ -12,7 +12,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3" v-for="(post, index) in listaPosts" :key="post.id" :post="post">
+                            <div class="col-md-4 col-sm-12" v-for="(post, index) in listaPosts" :key="post.id" :post="post">
                                 <post-component @exibir-post="exibirPost" @editar-post="editarPost" @deletar-post="deletarPost" @descer-post="descerPost" @subir-post="subirPost" :color="color" :index="index" :post="post" :descer="descer" :subir="subir"></post-component>
                                 <br>
                             </div>

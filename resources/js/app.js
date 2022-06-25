@@ -12,7 +12,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret, faMagnifyingGlass, faFloppyDisk, faCircleExclamation, faBomb, faMugHot, faClock, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faArrowDown, faArrowUp, faPenToSquare, faTrash, faUserSecret, faMagnifyingGlass, faFloppyDisk, faCircleExclamation, faBomb, faMugHot, faClock, faMinus, faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 import Vue from 'vue';
 
 library.add(faUserSecret)
@@ -28,6 +28,8 @@ library.add(faCircleExclamation)
 library.add(faBomb)
 library.add(faMugHot)
 library.add(faClock)
+library.add(faPlay)
+library.add(faPause)
 
 /**
  * The following block of code may be used to automatically register your

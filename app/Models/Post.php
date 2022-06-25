@@ -20,7 +20,9 @@ class Post extends Model
         'scheduledto',
         'description',
         'user_id',
-        'frame_id'
+        'frame_id',
+        'time',
+        'isrunning'
     ];
 
     public function messages()

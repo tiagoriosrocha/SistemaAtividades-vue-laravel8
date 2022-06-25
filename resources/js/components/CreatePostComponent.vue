@@ -56,7 +56,7 @@ export default {
                 'title': this.title,
                 'description': this.description,
                 'scheduledto': this.scheduledto,
-                'frameid' : this.frameid
+                'frameid' : this.frameid,
             })
             .then(response => {
                 var post = response.data
